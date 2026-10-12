@@ -10,3 +10,8 @@ backgrounds/*.tmp
 
 # Local source art used by tools/marin_generate.py (not redistributed)
 marin_kitagawa/
+
+# Python bytecode
+tools/__pycache__/
+__pycache__/
+*.pyc

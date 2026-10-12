@@ -1,0 +1,17 @@
+{
+  "num": "07",
+  "slug": "marin-premium-07-peace",
+  "theme": "Marin Premium 07 Peace",
+  "title": "Barış İşareti",
+  "wallpaper": "Marin-07-peace.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-j3mmdw.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#281917",
+    "foreground": "#e1dbdb",
+    "accent": "#dba194",
+    "primary": "#d9ba9a",
+    "secondary": "#d99aab"
+  },
+  "generator": "tools/marin_generate.py"
+}

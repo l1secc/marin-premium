@@ -1,0 +1,17 @@
+{
+  "num": "05",
+  "slug": "marin-premium-05-sky",
+  "theme": "Marin Premium 05 Sky",
+  "title": "Gökyüzü",
+  "wallpaper": "Marin-05-sky.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-j37kz5.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#171f25",
+    "foreground": "#dbdee1",
+    "accent": "#91cbea",
+    "primary": "#e5c6a1",
+    "secondary": "#dee3ba"
+  },
+  "generator": "tools/marin_generate.py"
+}

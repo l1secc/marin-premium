@@ -1,0 +1,17 @@
+{
+  "num": "21",
+  "slug": "marin-premium-21-altin",
+  "theme": "Marin Premium 21 Altin",
+  "title": "Altın Gyaru",
+  "wallpaper": "Marin-21-golden-gyaru.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3981699.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#281d17",
+    "foreground": "#e1dddb",
+    "accent": "#f2c68a",
+    "primary": "#efe692",
+    "secondary": "#9fc3d8"
+  },
+  "generator": "tools/marin_generate.py"
+}

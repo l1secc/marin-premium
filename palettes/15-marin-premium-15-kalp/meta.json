@@ -1,0 +1,17 @@
+{
+  "num": "15",
+  "slug": "marin-premium-15-kalp",
+  "theme": "Marin Premium 15 Kalp",
+  "title": "Kalp Pozu",
+  "wallpaper": "Marin-15-heart-peace.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-3zj5pd.png",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#2a1814",
+    "foreground": "#e1dcdb",
+    "accent": "#f4989e",
+    "primary": "#f4b39c",
+    "secondary": "#f3c591"
+  },
+  "generator": "tools/marin_generate.py"
+}

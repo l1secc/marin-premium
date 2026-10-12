@@ -1,0 +1,17 @@
+{
+  "num": "23",
+  "slug": "marin-premium-23-seytan",
+  "theme": "Marin Premium 23 Seytan",
+  "title": "Şeytani Marin",
+  "wallpaper": "Marin-23-demon.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3985428.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#24141a",
+    "foreground": "#e1dbdd",
+    "accent": "#e0b4cb",
+    "primary": "#8f6cc3",
+    "secondary": "#e2b7c0"
+  },
+  "generator": "tools/marin_generate.py"
+}

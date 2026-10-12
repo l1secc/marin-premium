@@ -1,0 +1,17 @@
+{
+  "num": "16",
+  "slug": "marin-premium-16-isilti",
+  "theme": "Marin Premium 16 Isilti",
+  "title": "Işıltı",
+  "wallpaper": "Marin-16-sparkle.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-v9l5mm.png",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#221e15",
+    "foreground": "#e1dfdb",
+    "accent": "#bc9b5c",
+    "primary": "#e1b6c7",
+    "secondary": "#cd9fd8"
+  },
+  "generator": "tools/marin_generate.py"
+}

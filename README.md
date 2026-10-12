@@ -27,60 +27,68 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 
 | File             | Purpose                                                                |
 |------------------|------------------------------------------------------------------------|
-| `colors.toml`    | Master color scheme (drives every generated config)                   |
-| `hyprland.conf`  | Window manager: 3-stop gradient border, blur, shadows, animations      |
-| `shell.toml`     | Omarchy bar / OSD / launcher / lock / polkit surfaces (Quattro shell)  |
-| `ghostty.conf`   | 16-color ANSI terminal matrix (Ghostty; Alacritty/Kitty/Foot auto-gen) |
-| `waybar.css`     | Glassmorphism Waybar with module-specific color hints                 |
-| `backgrounds/`   | `Marin-01-festival-night.jpg` — the master theme's 1920×1080 wallpaper |
-| `tools/`         | Per-photo theme generator (`marin_generate.py`), manifest, `marin-next` |
+| `colors.toml`    | **Active** palette (drives terminals, editors, bar, menus, lock screen) |
+| `hyprland.conf`  | Active window manager: gradient border, blur, shadows, animations      |
+| `shell.toml`     | Active Omarchy bar / OSD / launcher / menu / lock surfaces             |
+| `waybar.css`     | Active Glassmorphism Waybar styles                                     |
+| `backgrounds/`   | 23 Marin wallpapers (1920×1080) — the theme's gallery                  |
+| `palettes/`      | 23 palette bundles; `marin-next` copies one to the root on switch      |
+| `tools/`         | `marin_generate.py` (palette generator) + `marin-next` (photo switcher) |
 
 ---
 
-## Photo themes
+## One theme, all photos
 
-Every Marin photo becomes its own Omarchy theme under `~/.config/omarchy/themes/`:
-its wallpaper **and** its whole palette (terminal, bar, menus, launcher, lock screen,
-window borders) are sampled from that photo. Switching photo and switching desktop
-colours is therefore one action.
+All 23 Marin photos live under the **single** `marin-premium` theme. Each photo
+has a palette bundle in `palettes/<num>-<slug>/`; `marin-next` copies the chosen
+bundle's `colors.toml` / `shell.toml` / `waybar.css` / `hyprland.conf` to the
+theme root, re-applies the theme — so Omarchy regenerates every terminal,
+editor, bar, menu, launcher and lock-screen config from that photo's palette —
+and then pins the matching wallpaper.
 
-| # | Theme | Title |
-|---|-------|-------|
-| 01 | `marin-premium` | Klasik · Festival Gecesi (master, hand-authored palette) |
-| 02 | `marin-premium-02-pink` | Pembe Portre |
-| 03 | `marin-premium-03-pastel` | Pastel Tam Boy |
-| 04 | `marin-premium-04-duo` | İkili Lila |
-| 05 | `marin-premium-05-sky` | Gökyüzü |
-| 06 | `marin-premium-06-wink` | Göz Kırpma |
-| 07 | `marin-premium-07-peace` | Barış İşareti |
-| 08 | `marin-premium-08-typography` | Tipografi |
-| 09 | `marin-premium-09-kimono` | Kimono Gün Batımı |
-| 10 | `marin-premium-10-hanami` | Sakura Kimono |
-| 11 | `marin-premium-11-uniform` | Üniforma Kalp |
-| 12 | `marin-premium-12-sakura` | Sakura Rüzgarı |
-| 13 | `marin-premium-13-deniz` | Deniz Kıyısı |
-| 14 | `marin-premium-14-orman` | Orman Fısıltısı |
-| 15 | `marin-premium-15-kalp` | Kalp Pozu |
-| 16 | `marin-premium-16-isilti` | Işıltı |
-| 17 | `marin-premium-17-lila` | Lila Huzur |
-| 18 | `marin-premium-18-sehir` | Şehir Yürüyüşü |
-| 19 | `marin-premium-19-neseli` | Neşeli An |
-| 20 | `marin-premium-20-kalpler` | Kalp Kalbe |
-| 21 | `marin-premium-21-altin` | Altın Gyaru |
-| 22 | `marin-premium-22-bokeh` | Bokeh Gülüş |
-| 23 | `marin-premium-23-seytan` | Şeytani Marin |
+One roof holds everything: one theme entry, one gallery of 23 wallpapers, one
+palette per photo.
 
-Cycle through them (photo + full palette together):
+| # | Title | Palette bundle |
+|---|-------|----------------|
+| 01 | Klasik · Festival Gecesi | `palettes/01-marin-premium` |
+| 02 | Pembe Portre | `palettes/02-marin-premium-02-pink` |
+| 03 | Pastel Tam Boy | `palettes/03-marin-premium-03-pastel` |
+| 04 | İkili Lila | `palettes/04-marin-premium-04-duo` |
+| 05 | Gökyüzü | `palettes/05-marin-premium-05-sky` |
+| 06 | Göz Kırpma | `palettes/06-marin-premium-06-wink` |
+| 07 | Barış İşareti | `palettes/07-marin-premium-07-peace` |
+| 08 | Tipografi | `palettes/08-marin-premium-08-typography` |
+| 09 | Kimono Gün Batımı | `palettes/09-marin-premium-09-kimono` |
+| 10 | Sakura Kimono | `palettes/10-marin-premium-10-hanami` |
+| 11 | Üniforma Kalp | `palettes/11-marin-premium-11-uniform` |
+| 12 | Sakura Rüzgarı | `palettes/12-marin-premium-12-sakura` |
+| 13 | Deniz Kıyısı | `palettes/13-marin-premium-13-deniz` |
+| 14 | Orman Fısıltısı | `palettes/14-marin-premium-14-orman` |
+| 15 | Kalp Pozu | `palettes/15-marin-premium-15-kalp` |
+| 16 | Işıltı | `palettes/16-marin-premium-16-isilti` |
+| 17 | Lila Huzur | `palettes/17-marin-premium-17-lila` |
+| 18 | Şehir Yürüyüşü | `palettes/18-marin-premium-18-sehir` |
+| 19 | Neşeli An | `palettes/19-marin-premium-19-neseli` |
+| 20 | Kalp Kalbe | `palettes/20-marin-premium-20-kalpler` |
+| 21 | Altın Gyaru | `palettes/21-marin-premium-21-altin` |
+| 22 | Bokeh Gülüş | `palettes/22-marin-premium-22-bokeh` |
+| 23 | Şeytani Marin | `palettes/23-marin-premium-23-seytan` |
+
+Switch photo + whole desktop palette together:
 
 ```bash
-marin-next        # next photo theme
-marin-next prev   # previous photo theme
+marin-next          # next photo: wallpaper + every surface retinted
+marin-next prev     # previous photo
+marin-next 20       # jump to photo #20
+marin-next bokeh    # jump by name match
+marin-next sync     # re-align palette with the current background
 ```
 
-Regenerate any variant after editing the master configs:
+Regenerate the bundles and wallpapers after editing the classic master configs:
 
 ```bash
-python3 tools/marin_generate.py                 # all photo themes
+python3 tools/marin_generate.py                 # all palettes + wallpapers
 python3 tools/marin_generate.py --only marin-premium-20-kalpler
 python3 tools/marin_generate.py --dry-run       # check palettes without writing
 ```
@@ -89,13 +97,13 @@ python3 tools/marin_generate.py --dry-run       # check palettes without writing
 
 ## Backgrounds
 
-The master theme ships one wallpaper, `backgrounds/Marin-01-festival-night.jpg`
-(1920×1080, cropped and given a soft top scrim for bar legibility). The earlier
-near-black procedural `BG1–BG6` backgrounds were removed.
+The single theme ships **23 Marin wallpapers** in `backgrounds/`. Each is
+1920×1080, cropped to 16:9 and given a photo-tinted top scrim so the bar stays
+readable. The earlier near-black procedural `BG1–BG6` backgrounds were removed.
 
-Each photo theme carries its own wallpaper under its own `backgrounds/` folder.
-All wallpapers are prepared 1920×1080 with a photo-tinted top scrim so the bar
-stays readable.
+`marin-next` keeps the wallpaper and the palette in sync. Omarchy's own
+`omarchy theme bg next` can cycle the gallery without retinting; run
+`marin-next sync` afterwards to align the desktop with that wallpaper.
 
 ---
 
@@ -107,8 +115,7 @@ Marin Kitagawa's character design is the copyrighted work of **Shinichi Fukuda**
 themes are a personal wallpaper set; the artwork belongs to its original creators and
 is used locally for a personal desktop only, **not** for redistribution of the art.
 
-If you want real Marin wallpapers for personal use, respect the artists' licenses and
-do not republish their work.
+If you want to add your own wallpaper to the gallery instead:
 
 ```bash
 # Drop the file into the theme's backgrounds folder (PNG/JPG/WEBP works)
@@ -129,6 +136,8 @@ omarchy theme bg next    # cycle through backgrounds
 ### From your local checkout (you're already there)
 
 ```bash
+# install the photo switcher on your PATH
+install -m755 tools/marin-next ~/.local/bin/marin-next
 omarchy theme set "Marin Premium"
 ```
 
@@ -137,24 +146,26 @@ omarchy theme set "Marin Premium"
 ```bash
 git clone https://github.com/l1secc/marin-premium.git \
   ~/.config/omarchy/themes/marin-premium
+install -m755 ~/.config/omarchy/themes/marin-premium/tools/marin-next ~/.local/bin/marin-next
 omarchy theme set "Marin Premium"
 ```
 
-> A theme cloned from a git repo skips the `*.lua` / `*.toml` / `*.json` files Omarchy treats as executable; the rest (including the background) stays.
+> A theme cloned from a git repo skips the `*.lua` / `*.toml` / `*.json` files Omarchy treats as executable; the rest (including `backgrounds/` and `palettes/`) stays.
 
 ---
 
 ## Customization
 
-### Tweak the palette
+### Tweak the classic palette
 
-Edit `colors.toml`. Then:
+The root `colors.toml` is the *active* palette and is replaced on every
+`marin-next` switch. To change the default (classic) palette, edit
+`palettes/01-marin-premium/colors.toml`, regenerate the other bundles from it,
+then apply:
 
 ```bash
-omarchy theme set "Marin Premium"     # re-apply
-omarchy restart terminal              # re-render ghostty
-omarchy restart shell                 # re-render bar / launcher / OSD
-hyprctl reload                        # reload hyprland config
+python3 tools/marin_generate.py     # retint all bundles from the classic
+marin-next 1                        # apply the classic palette
 ```
 
 ### Adjust window animations
@@ -169,12 +180,15 @@ hyprctl configerrors
 
 Edit `waybar.css` — the file is fully tokenized with `@define-color` at the top. The bar reads this file on save; if Waybar doesn't, restart it with `omarchy restart waybar` (varies by setup).
 
-### Add a wallpaper
+### Add a wallpaper to the gallery
 
-Drop any 1920×1080 (or higher) PNG/JPG/WEBP into `backgrounds/`. Cycle through them with `Super + Alt + Space` → Style → Background, or:
+Drop any 1920×1080 (or higher) PNG/JPG/WEBP into `backgrounds/`, then add a
+matching bundle under `palettes/` (or point `marin-next` at it). Cycle the
+gallery with `Super + Alt + Space` → Style → Background, or:
 
 ```bash
-omarchy theme bg next
+omarchy theme bg next   # wallpaper only
+marin-next sync         # retint the desktop to that wallpaper
 ```
 
 ---

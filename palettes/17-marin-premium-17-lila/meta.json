@@ -1,0 +1,17 @@
+{
+  "num": "17",
+  "slug": "marin-premium-17-lila",
+  "theme": "Marin Premium 17 Lila",
+  "title": "Lila Huzur",
+  "wallpaper": "Marin-17-lilac-hoodie.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_4007074.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#27161d",
+    "foreground": "#e1dbdd",
+    "accent": "#d589bf",
+    "primary": "#f4c49c",
+    "secondary": "#d48fa9"
+  },
+  "generator": "tools/marin_generate.py"
+}

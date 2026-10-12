@@ -1,0 +1,17 @@
+{
+  "num": "10",
+  "slug": "marin-premium-10-hanami",
+  "theme": "Marin Premium 10 Hanami",
+  "title": "Sakura Kimono",
+  "wallpaper": "Marin-10-hanami-kimono.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3994920.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#211813",
+    "foreground": "#e1dddb",
+    "accent": "#bc735c",
+    "primary": "#bc935c",
+    "secondary": "#be6175"
+  },
+  "generator": "tools/marin_generate.py"
+}
