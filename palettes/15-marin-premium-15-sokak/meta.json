@@ -1,0 +1,17 @@
+{
+  "num": "15",
+  "slug": "marin-premium-15-sokak",
+  "theme": "Marin Premium 15 Sokak",
+  "title": "Sokakta",
+  "wallpaper": "Marin-15-street.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-pkqym9.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#251917",
+    "foreground": "#e1dcdb",
+    "accent": "#f2c18d",
+    "primary": "#a4c7da",
+    "secondary": "#a19ed7"
+  },
+  "generator": "tools/marin_generate.py"
+}

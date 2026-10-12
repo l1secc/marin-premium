@@ -1,0 +1,17 @@
+{
+  "num": "20",
+  "slug": "marin-premium-20-keyif",
+  "theme": "Marin Premium 20 Keyif",
+  "title": "Keyif Anı",
+  "wallpaper": "Marin-20-treat.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-zpgwgv.png",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#192427",
+    "foreground": "#dbe0e1",
+    "accent": "#afdee8",
+    "primary": "#f3c79e",
+    "secondary": "#b5cde7"
+  },
+  "generator": "tools/marin_generate.py"
+}

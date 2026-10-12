@@ -1,0 +1,17 @@
+{
+  "num": "13",
+  "slug": "marin-premium-13-utangac",
+  "theme": "Marin Premium 13 Utangac",
+  "title": "Utangaç An",
+  "wallpaper": "Marin-13-shy-moment.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-j37kpm.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#251b17",
+    "foreground": "#e1dcdb",
+    "accent": "#b0d6ec",
+    "primary": "#d6aa9a",
+    "secondary": "#baa8db"
+  },
+  "generator": "tools/marin_generate.py"
+}

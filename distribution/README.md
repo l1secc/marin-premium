@@ -27,7 +27,7 @@ git add assets/themes/marin-premium.webp src/data/themes.json
 git commit -m "Add Marin Premium theme"
 git push -u origin add-marin-premium
 gh pr create --repo omacom/omarchy-site --title "Add Marin Premium theme" \
-  --body "Marin Premium is a dark theme inspired by Marin Kitagawa, with 35 bundled SFW wallpapers and a photo-derived palette per wallpaper. Repo: https://github.com/l1secc/marin-premium"
+  --body "Marin Premium is a dark theme inspired by Marin Kitagawa, with 20 bundled SFW wallpapers and a photo-derived palette per wallpaper. Repo: https://github.com/l1secc/marin-premium"
 ```
 
 ## Before submitting — checklist
@@ -35,7 +35,7 @@ gh pr create --repo omacom/omarchy-site --title "Add Marin Premium theme" \
 - [x] `omarchy theme install <url>` works and applies the theme (verified).
 - [x] Installed theme is colours-only: no Lua, no terminal configs, no
       `vscode.json`. Wallpapers, palettes and `tools/` are the only extras.
-- [x] All 35 wallpapers are SFW (safe/sfw rated at the source, see `CREDITS.md`).
+- [x] All 20 wallpapers are SFW (safe/sfw rated at the source, see `CREDITS.md`).
 - [x] `preview.webp` is 16:9.
 - [ ] Decide on the artwork: the bundled wallpapers are third-party fan art
       (see `CREDITS.md`). Omarchy accepts themes with bundled wallpapers, but if

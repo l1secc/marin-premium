@@ -1,0 +1,17 @@
+{
+  "num": "16",
+  "slug": "marin-premium-16-yumusak",
+  "theme": "Marin Premium 16 Yumusak",
+  "title": "Yumuşak Işık",
+  "wallpaper": "Marin-16-soft-light.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-po3e3j.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#281815",
+    "foreground": "#e1dbdb",
+    "accent": "#f4b499",
+    "primary": "#f4d49d",
+    "secondary": "#be6190"
+  },
+  "generator": "tools/marin_generate.py"
+}

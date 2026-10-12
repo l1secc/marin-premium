@@ -1,0 +1,17 @@
+{
+  "num": "03",
+  "slug": "marin-premium-03-kalpler",
+  "theme": "Marin Premium 03 Kalpler",
+  "title": "Kalp Kalbe",
+  "wallpaper": "Marin-03-hearts.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_4015338.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#28141d",
+    "foreground": "#e1dbde",
+    "accent": "#e3bbb4",
+    "primary": "#e997d4",
+    "secondary": "#99c0d5"
+  },
+  "generator": "tools/marin_generate.py"
+}

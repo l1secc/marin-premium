@@ -1,0 +1,17 @@
+{
+  "num": "06",
+  "slug": "marin-premium-06-sahil",
+  "theme": "Marin Premium 06 Sahil",
+  "title": "Sahil Molası",
+  "wallpaper": "Marin-06-beach.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-28lozy.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#171d26",
+    "foreground": "#dbdde1",
+    "accent": "#72b5ef",
+    "primary": "#d5a996",
+    "secondary": "#7b92eb"
+  },
+  "generator": "tools/marin_generate.py"
+}

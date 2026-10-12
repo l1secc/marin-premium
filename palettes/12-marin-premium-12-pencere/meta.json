@@ -1,0 +1,17 @@
+{
+  "num": "12",
+  "slug": "marin-premium-12-pencere",
+  "theme": "Marin Premium 12 Pencere",
+  "title": "Pencere Işığı",
+  "wallpaper": "Marin-12-window-light.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-g7g9e7.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#271917",
+    "foreground": "#e1dbdb",
+    "accent": "#e0bfb1",
+    "primary": "#e1d1b4",
+    "secondary": "#e1b4bb"
+  },
+  "generator": "tools/marin_generate.py"
+}
