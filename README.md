@@ -133,24 +133,47 @@ omarchy theme bg next    # cycle through backgrounds
 
 ## Install
 
-### From your local checkout (you're already there)
+### Through Omarchy's own theme installer (recommended)
 
 ```bash
-# install the photo switcher on your PATH
-install -m755 tools/marin-next ~/.local/bin/marin-next
+omarchy theme install https://github.com/l1secc/marin-premium.git
+~/.config/omarchy/themes/marin-premium/install.sh
+```
+
+`omarchy theme install` clones the repo and applies the theme in one go. Because
+Omarchy never runs code from a theme it installed, the second line is the
+one-time bootstrap that puts the photo switcher on your PATH. It is idempotent,
+and a `theme-set` hook keeps it current after `omarchy theme update` or a
+re-apply.
+
+### One command (clone + apply + bootstrap)
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/l1secc/marin-premium/master/bootstrap.sh)
+```
+
+### From a local checkout (development)
+
+```bash
+./install.sh
 omarchy theme set "Marin Premium"
 ```
 
-### From a fresh install
+> Omarchy keeps a theme installed from a git repo colours-only: any `*.lua`, the
+> terminal configs (`alacritty.toml`, `foot.ini`, `ghostty.conf`, `kitty.conf`)
+> and `vscode.json` are dropped and regenerated from `colors.toml` instead.
+> Everything else — `backgrounds/`, `palettes/`, `tools/` — is kept as written.
 
-```bash
-git clone https://github.com/l1secc/marin-premium.git \
-  ~/.config/omarchy/themes/marin-premium
-install -m755 ~/.config/omarchy/themes/marin-premium/tools/marin-next ~/.local/bin/marin-next
-omarchy theme set "Marin Premium"
+### Showing up in the Omarchy theme picker
+
+The built-in picker reads the community list from
+[omarchy-site](https://github.com/omacom/omarchy-site) `src/data/themes.json`.
+Adding this theme there is a PR that pairs a 16:9 preview image under
+`public/assets/themes/` with one entry:
+
+```json
+{ "repo": "https://github.com/l1secc/marin-premium", "image": "/assets/themes/marin-premium.webp", "name": "Marin Premium" }
 ```
-
-> A theme cloned from a git repo skips the `*.lua` / `*.toml` / `*.json` files Omarchy treats as executable; the rest (including `backgrounds/` and `palettes/`) stays.
 
 ---
 
