@@ -1,6 +1,7 @@
 # ============================================================================
-#  Marin Kitagawa — "Marin Premium"  ·  Omarchy shell surfaces
+#  Marin Kitagawa — "Marin Premium"  ·  Omarchy Quattro shell surfaces
 #  Glassmorphism-leaning navy surfaces with pink / gold / lilac accents.
+#  Every surface uses translucent navy so the desktop can breathe through.
 # ============================================================================
 
 [bar]
@@ -13,7 +14,8 @@ size-horizontal  = 30
 size-vertical    = 32
 
 [hyprland]
-active-border            = "rgba(f2a3c0ee) rgba(e8c98fee) 45deg"
+# Same 3-stop gradient as the active window border — visual unity
+active-border            = "rgba(f2a3c0ee) rgba(bba7e6ee) rgba(e8c98fee) 45deg"
 active-border-foreground = "#f2a3c0"
 
 [controls]
@@ -135,7 +137,7 @@ selection-alpha  = 0.45
 
 [image-picker]
 scrim                   = "#0f1522"
-scrim-alpha             = 0.5
+scrim-alpha             = "0.5"
 text                    = "#d9dfee"
 selected-border         = "#f2a3c0"
 selected-border-alpha   = 1.0
