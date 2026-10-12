@@ -1,0 +1,236 @@
+{
+  "_note": "Marin Premium photo-theme manifest. src paths are relative to SOURCE_ROOT (~/theme/marin_kitagawa). Each entry becomes one Omarchy theme: its own wallpaper + its own full palette (terminal, bar, menu, launcher, lock, borders).",
+  "source_root": "~/theme/marin_kitagawa",
+  "photos": [
+    {
+      "num": "01",
+      "slug": "marin-premium",
+      "name": "Marin Premium",
+      "title": "Klasik · Festival Gecesi",
+      "file": "Marin-01-festival-night",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-g7g963.jpg",
+      "focus": "north:0.05",
+      "palette": "classic"
+    },
+    {
+      "num": "02",
+      "slug": "marin-premium-02-pink",
+      "name": "Marin Premium 02 Pink",
+      "title": "Pembe Portre",
+      "file": "Marin-02-pink-portrait",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-rd1eeq.jpg",
+      "focus": "north:0.045",
+      "palette": "photo"
+    },
+    {
+      "num": "03",
+      "slug": "marin-premium-03-pastel",
+      "name": "Marin Premium 03 Pastel",
+      "title": "Pastel Tam Boy",
+      "file": "Marin-03-pastel-fullbody",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-l355dy.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "04",
+      "slug": "marin-premium-04-duo",
+      "name": "Marin Premium 04 Duo",
+      "title": "İkili Lila",
+      "file": "Marin-04-duo-lilac",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-o38lz5.png",
+      "focus": "north:0.06",
+      "palette": "photo"
+    },
+    {
+      "num": "05",
+      "slug": "marin-premium-05-sky",
+      "name": "Marin Premium 05 Sky",
+      "title": "Gökyüzü",
+      "file": "Marin-05-sky",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-j37kz5.jpg",
+      "focus": "north:0.04",
+      "palette": "photo"
+    },
+    {
+      "num": "06",
+      "slug": "marin-premium-06-wink",
+      "name": "Marin Premium 06 Wink",
+      "title": "Göz Kırpma",
+      "file": "Marin-06-wink",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-e7lekw.png",
+      "focus": "north:0.05",
+      "palette": "photo"
+    },
+    {
+      "num": "07",
+      "slug": "marin-premium-07-peace",
+      "name": "Marin Premium 07 Peace",
+      "title": "Barış İşareti",
+      "file": "Marin-07-peace",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-j3mmdw.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "08",
+      "slug": "marin-premium-08-typography",
+      "name": "Marin Premium 08 Typography",
+      "title": "Tipografi",
+      "file": "Marin-08-typography",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-9me2vk.png",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "09",
+      "slug": "marin-premium-09-kimono",
+      "name": "Marin Premium 09 Kimono",
+      "title": "Kimono Gün Batımı",
+      "file": "Marin-09-kimono-sunset",
+      "src": "01-marin-anime-art/marin_kitagawa_3965832.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "10",
+      "slug": "marin-premium-10-hanami",
+      "name": "Marin Premium 10 Hanami",
+      "title": "Sakura Kimono",
+      "file": "Marin-10-hanami-kimono",
+      "src": "01-marin-anime-art/marin_kitagawa_3994920.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "11",
+      "slug": "marin-premium-11-uniform",
+      "name": "Marin Premium 11 Uniform",
+      "title": "Üniforma Kalp",
+      "file": "Marin-11-uniform-heart",
+      "src": "01-marin-anime-art/marin_kitagawa_3981070.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "12",
+      "slug": "marin-premium-12-sakura",
+      "name": "Marin Premium 12 Sakura",
+      "title": "Sakura Rüzgarı",
+      "file": "Marin-12-sakura-wind",
+      "src": "01-marin-anime-art/marin_kitagawa_3963863.png",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "13",
+      "slug": "marin-premium-13-deniz",
+      "name": "Marin Premium 13 Deniz",
+      "title": "Deniz Kıyısı",
+      "file": "Marin-13-sea-shore",
+      "src": "01-marin-anime-art/marin_kitagawa_3962007.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "14",
+      "slug": "marin-premium-14-orman",
+      "name": "Marin Premium 14 Orman",
+      "title": "Orman Fısıltısı",
+      "file": "Marin-14-forest",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-28l3kg.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "15",
+      "slug": "marin-premium-15-kalp",
+      "name": "Marin Premium 15 Kalp",
+      "title": "Kalp Pozu",
+      "file": "Marin-15-heart-peace",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-3zj5pd.png",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "16",
+      "slug": "marin-premium-16-isilti",
+      "name": "Marin Premium 16 Isilti",
+      "title": "Işıltı",
+      "file": "Marin-16-sparkle",
+      "src": "03-wallpaper/marin_kitagawa_wallhaven-v9l5mm.png",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "17",
+      "slug": "marin-premium-17-lila",
+      "name": "Marin Premium 17 Lila",
+      "title": "Lila Huzur",
+      "file": "Marin-17-lilac-hoodie",
+      "src": "01-marin-anime-art/marin_kitagawa_4007074.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "18",
+      "slug": "marin-premium-18-sehir",
+      "name": "Marin Premium 18 Sehir",
+      "title": "Şehir Yürüyüşü",
+      "file": "Marin-18-city-walk",
+      "src": "01-marin-anime-art/marin_kitagawa_3965829.jpg",
+      "focus": "north:0.03",
+      "palette": "photo"
+    },
+    {
+      "num": "19",
+      "slug": "marin-premium-19-neseli",
+      "name": "Marin Premium 19 Neseli",
+      "title": "Neşeli An",
+      "file": "Marin-19-playful",
+      "src": "01-marin-anime-art/marin_kitagawa_3997330.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "20",
+      "slug": "marin-premium-20-kalpler",
+      "name": "Marin Premium 20 Kalpler",
+      "title": "Kalp Kalbe",
+      "file": "Marin-20-hearts",
+      "src": "01-marin-anime-art/marin_kitagawa_4015338.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "21",
+      "slug": "marin-premium-21-altin",
+      "name": "Marin Premium 21 Altin",
+      "title": "Altın Gyaru",
+      "file": "Marin-21-golden-gyaru",
+      "src": "01-marin-anime-art/marin_kitagawa_3981699.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "22",
+      "slug": "marin-premium-22-bokeh",
+      "name": "Marin Premium 22 Bokeh",
+      "title": "Bokeh Gülüş",
+      "file": "Marin-22-bokeh-smile",
+      "src": "01-marin-anime-art/marin_kitagawa_3981702.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "23",
+      "slug": "marin-premium-23-seytan",
+      "name": "Marin Premium 23 Seytan",
+      "title": "Şeytani Marin",
+      "file": "Marin-23-demon",
+      "src": "01-marin-anime-art/marin_kitagawa_3985428.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    }
+  ]
+}

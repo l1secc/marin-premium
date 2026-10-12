@@ -32,22 +32,70 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 | `shell.toml`     | Omarchy bar / OSD / launcher / lock / polkit surfaces (Quattro shell)  |
 | `ghostty.conf`   | 16-color ANSI terminal matrix (Ghostty; Alacritty/Kitty/Foot auto-gen) |
 | `waybar.css`     | Glassmorphism Waybar with module-specific color hints                 |
-| `backgrounds/`   | 6 original gradient backgrounds (1920×1080, ~636 KB total)             |
+| `backgrounds/`   | `Marin-01-festival-night.jpg` — the master theme's 1920×1080 wallpaper |
+| `tools/`         | Per-photo theme generator (`marin_generate.py`), manifest, `marin-next` |
+
+---
+
+## Photo themes
+
+Every Marin photo becomes its own Omarchy theme under `~/.config/omarchy/themes/`:
+its wallpaper **and** its whole palette (terminal, bar, menus, launcher, lock screen,
+window borders) are sampled from that photo. Switching photo and switching desktop
+colours is therefore one action.
+
+| # | Theme | Title |
+|---|-------|-------|
+| 01 | `marin-premium` | Klasik · Festival Gecesi (master, hand-authored palette) |
+| 02 | `marin-premium-02-pink` | Pembe Portre |
+| 03 | `marin-premium-03-pastel` | Pastel Tam Boy |
+| 04 | `marin-premium-04-duo` | İkili Lila |
+| 05 | `marin-premium-05-sky` | Gökyüzü |
+| 06 | `marin-premium-06-wink` | Göz Kırpma |
+| 07 | `marin-premium-07-peace` | Barış İşareti |
+| 08 | `marin-premium-08-typography` | Tipografi |
+| 09 | `marin-premium-09-kimono` | Kimono Gün Batımı |
+| 10 | `marin-premium-10-hanami` | Sakura Kimono |
+| 11 | `marin-premium-11-uniform` | Üniforma Kalp |
+| 12 | `marin-premium-12-sakura` | Sakura Rüzgarı |
+| 13 | `marin-premium-13-deniz` | Deniz Kıyısı |
+| 14 | `marin-premium-14-orman` | Orman Fısıltısı |
+| 15 | `marin-premium-15-kalp` | Kalp Pozu |
+| 16 | `marin-premium-16-isilti` | Işıltı |
+| 17 | `marin-premium-17-lila` | Lila Huzur |
+| 18 | `marin-premium-18-sehir` | Şehir Yürüyüşü |
+| 19 | `marin-premium-19-neseli` | Neşeli An |
+| 20 | `marin-premium-20-kalpler` | Kalp Kalbe |
+| 21 | `marin-premium-21-altin` | Altın Gyaru |
+| 22 | `marin-premium-22-bokeh` | Bokeh Gülüş |
+| 23 | `marin-premium-23-seytan` | Şeytani Marin |
+
+Cycle through them (photo + full palette together):
+
+```bash
+marin-next        # next photo theme
+marin-next prev   # previous photo theme
+```
+
+Regenerate any variant after editing the master configs:
+
+```bash
+python3 tools/marin_generate.py                 # all photo themes
+python3 tools/marin_generate.py --only marin-premium-20-kalpler
+python3 tools/marin_generate.py --dry-run       # check palettes without writing
+```
 
 ---
 
 ## Backgrounds
 
-The theme ships **6 original procedural backgrounds** in `backgrounds/`. All are 1920×1080 JPG, generated from the theme's own palette — *no copyrighted image data* is included.
+The master theme ships one wallpaper, `backgrounds/Marin-01-festival-night.jpg`
+(1920×1080, cropped and given a soft top scrim for bar legibility). The earlier
+near-black procedural `BG1–BG6` backgrounds were removed.
 
-| File    | Mood                                                                 |
-|---------|----------------------------------------------------------------------|
-| `BG1.jpg` | Three-orb composition — pink upper-left, lilac right, gold lower-right |
-| `BG2.jpg` | Diagonal band flow — pink top, lilac middle, gold bottom             |
-| `BG3.jpg` | Starry night — subtle lilac glow + faint star field                   |
-| `BG4.jpg` | Horizon — pink at top, lilac mid, deep navy                          |
-| `BG5.jpg` | Anime-poster radial — pink upper-left, lilac upper-right             |
-| `BG6.jpg` | Minimal vignette — pure deep navy with soft center                   |
+Each photo theme carries its own wallpaper under its own `backgrounds/` folder.
+All wallpapers are prepared 1920×1080 with a photo-tinted top scrim so the bar
+stays readable.
 
 ---
 
@@ -55,19 +103,12 @@ The theme ships **6 original procedural backgrounds** in `backgrounds/`. All are
 
 Marin Kitagawa's character design is the copyrighted work of **Shinichi Fukuda** (manga) and **CloverWorks** (anime). The colors in this theme are *inspired* by her design — color inspiration is not copying, but redistributing someone else's artwork under our name is.
 
-**What this theme is:** the theme's *colors*, *config files*, and *original procedural backgrounds*. These are our work.
+**What this theme is:** the theme's *colors* and *config files* — our work. The photo
+themes are a personal wallpaper set; the artwork belongs to its original creators and
+is used locally for a personal desktop only, **not** for redistribution of the art.
 
-**What this theme is not:** a wallpaper pack of official or fan-art Marin artwork. We don't ship any.
-
-### Want real Marin wallpapers for personal use?
-
-If you want actual art of Marin as your wallpaper (legal for personal use, **not** to redistribute), the safest paths are:
-
-1. **Buy official goods** — Yen Press / Kodansha releases, Aniplex Plus, Good Smile Company sometimes include wallpapers with Blu-rays.
-2. **Official anime site** → check the show's official site / seasonal downloads.
-4. **Hire a fan artist** to create original art inspired by the character — both your own and the artist's license.
-
-If you do obtain a licensed wallpaper and want it in this theme:
+If you want real Marin wallpapers for personal use, respect the artists' licenses and
+do not republish their work.
 
 ```bash
 # Drop the file into the theme's backgrounds folder (PNG/JPG/WEBP works)
@@ -99,7 +140,7 @@ git clone https://github.com/l1secc/marin-premium.git \
 omarchy theme set "Marin Premium"
 ```
 
-> A theme cloned from a git repo skips the `*.lua` / `*.toml` / `*.json` files Omarchy treats as executable; the rest (including the 6 backgrounds) stays.
+> A theme cloned from a git repo skips the `*.lua` / `*.toml` / `*.json` files Omarchy treats as executable; the rest (including the background) stays.
 
 ---
 
@@ -142,4 +183,4 @@ omarchy theme bg next
 
 [MIT](LICENSE)
 
-This applies to the theme configuration, the colors, and the procedural backgrounds. *Marin Kitagawa* is a copyrighted character; the colors are referenced under fair-use / nominative-fair-use for the sake of palette inspiration only.
+This applies to the theme configuration and the colors. *Marin Kitagawa* is a copyrighted character; the colors are referenced under fair-use / nominative-fair-use for the sake of palette inspiration only. Wallpaper artwork remains the property of its original creators.

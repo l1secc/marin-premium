@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# omarchy:summary=Cycle Marin Premium photo themes (wallpaper + full palette together)
+# omarchy:args=[next|prev]
+# omarchy:examples=marin-next | marin-next prev
+
+# Every Marin Premium photo theme owns one wallpaper and one photo-derived
+# palette, so switching photo and switching desktop colours is one action.
+# Pass `prev` to walk the list backwards.
+
+set -euo pipefail
+
+THEMES_DIR="$HOME/.config/omarchy/themes"
+STATE_NAME="$HOME/.local/state/omarchy/current/theme.name"
+DIRECTION="${1:-next}"
+
+mapfile -t THEMES < <(
+  find "$THEMES_DIR" -maxdepth 1 -mindepth 1 -type d \
+    \( -name 'marin-premium' -o -name 'marin-premium-*' \) -printf '%f\n' 2>/dev/null | sort
+)
+
+if (( ${#THEMES[@]} == 0 )); then
+  echo "No marin-premium* themes found in $THEMES_DIR" >&2
+  exit 1
+fi
+
+CURRENT=$(cat "$STATE_NAME" 2>/dev/null || true)
+INDEX=-1
+for i in "${!THEMES[@]}"; do
+  if [[ ${THEMES[$i]} == "$CURRENT" ]]; then INDEX=$i; break; fi
+done
+
+case "$DIRECTION" in
+  prev | previous | -1) STEP=-1 ;;
+  *) STEP=1 ;;
+esac
+
+if (( INDEX == -1 )); then
+  NEXT=0
+else
+  NEXT=$(( (INDEX + STEP + ${#THEMES[@]}) % ${#THEMES[@]} ))
+fi
+TARGET=${THEMES[$NEXT]}
+
+info="$THEMES_DIR/$TARGET/.marin-photo.json"
+title=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["title"])' "$info" 2>/dev/null || echo "$TARGET")
+image=$(find "$THEMES_DIR/$TARGET/backgrounds" -maxdepth 1 -type f \
+  \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.webp' \) | sort | head -1)
+
+echo "Marin Premium → $title ($TARGET)"
+omarchy-theme-set "$TARGET"
+
+if [[ -n $image ]]; then
+  omarchy-notification-send "Marin Premium · $title" "Tema ve duvar kağıdı değişti · ${NEXT}+1/${#THEMES[@]}" \
+    --image "$image" -t 2500 >/dev/null 2>&1 || true
+else
+  omarchy-notification-send "Marin Premium · $title" "Tema ve duvar kağıdı değişti" -t 2500 >/dev/null 2>&1 || true
+fi
