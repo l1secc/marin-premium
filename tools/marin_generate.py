@@ -6,6 +6,8 @@ Every photo in tools/photos.json becomes its own Omarchy theme:
     ~/.config/omarchy/themes/<slug>/
         colors.toml          # palette extracted from the photo (drives EVERYTHING:
                              #  terminals, btop, helix, neovim, vscode, claude, pi, ...)
+                             #  background=black, foreground=photo pink↔red ink, and
+                             #  surface_* = the photo-tinted desktop chrome values
         shell.toml           # bar / menu / launcher / lock surfaces (premium glass, retinted)
         waybar.css           # waybar parity (omarchy Quattro uses shell.toml, kept for parity)
         hyprland.conf        # legacy/non-Quattro Hyprland gradient + look & feel
@@ -42,6 +44,22 @@ CLASSIC_DIR = os.path.join(PALETTES_DIR, "01-marin-premium")
 BG_DIR = os.path.join(MASTER_DIR, "backgrounds")
 MASTER_COLORS = os.path.join(CLASSIC_DIR, "colors.toml")
 TEMPLATE_FILES = ("shell.toml", "waybar.css", "hyprland.conf")
+
+# The terminal canvas is true black; Marin's colour lives in the ink, the
+# desktop chrome and the per-photo accents.
+TERMINAL_BACKGROUND = "#000000"
+
+# Roles whose terminal value differs from the desktop value carry a `surface_*`
+# twin in colors.toml holding the value the shipped desktop chrome was authored
+# with (see desktop_view).
+DESKTOP_TWINS = {
+    "background": "surface_background",
+    "foreground": "surface_foreground",
+    "bright_foreground": "surface_bright_foreground",
+    "muted": "surface_muted",
+    "red": "surface_red",
+    "blue": "surface_blue",
+}
 W, H = 1920, 1080
 AR = W / H
 
@@ -55,6 +73,16 @@ ANSI_ROLES = [
     ("blue", 224.0, 0.70),
     ("magenta", 335.0, 0.72),
 ]
+
+# Roles the terminal keeps at their *canonical* hue with a high saturation
+# floor, so its red reads as red and its blue reads as blue instead of being
+# pulled to dusty rose / periwinkle by the photo: (hue, saturation, lightness).
+# The photo-pulled variant, at the role's own ANSI_ROLES hue and lightness,
+# survives as surface_red / surface_blue for the desktop chrome.
+TRUE_HUE_ROLES = {
+    "red": (0.0, 0.88, 0.58),
+    "blue": (224.0, 0.88, 0.55),
+}
 
 HEX_RE = re.compile(r"^#?([0-9a-fA-F]{6})$")
 
@@ -237,11 +265,15 @@ def photo_palette(path: str) -> dict[str, str]:
     mood_sat = sum(v["s"] for v in a["vivid"][:5]) / max(1, len(a["vivid"][:5]))
 
     # ---- background family -------------------------------------------------
+    # The terminal canvas is true black (`background`); the photo tint lives on
+    # in `surface_background`, which drives the desktop chrome the theme ships
+    # (bar / menu / launcher / lock) together with the generated editor themes.
     bg_h = dh if ds >= 0.12 else accents[0]["h"]
     bg_l = clamp(0.085 + 0.045 * a["brightness"], 0.085, 0.125)
     bg_s = clamp(0.18 + 0.30 * ds, 0.18, 0.42)
 
-    background = from_hls(bg_h, bg_l, bg_s)
+    surface_background = from_hls(bg_h, bg_l, bg_s)
+    background = TERMINAL_BACKGROUND
     darker = from_hls(bg_h, bg_l * 0.55, bg_s * 0.95)
     bg_alt = from_hls(bg_h, bg_l * 0.75, bg_s * 0.98)
     surface = from_hls(bg_h, bg_l + 0.055, bg_s)
@@ -249,32 +281,48 @@ def photo_palette(path: str) -> dict[str, str]:
     lighter = from_hls(bg_h, bg_l + 0.09, bg_s * 1.10)
 
     # ---- foregrounds -------------------------------------------------------
+    # `surface_*` keeps the pale paper-white the desktop chrome is authored
+    # with; the terminal ink itself is computed below, once the ANSI roles are
+    # known, as a tone between Marin's photo-pulled pink and red.
     fg_h = bg_h
-    foreground = from_hls(fg_h, 0.87, 0.10)
-    bright_fg = from_hls(fg_h, 0.95, 0.04)
+    surface_foreground = from_hls(fg_h, 0.87, 0.10)
+    surface_bright_foreground = from_hls(fg_h, 0.95, 0.04)
     light_fg = from_hls(fg_h, 0.79, 0.14)
     dark_fg = from_hls(fg_h, 0.55, 0.18)
-    muted = from_hls(fg_h, 0.46, 0.20)
+    surface_muted = from_hls(fg_h, 0.46, 0.20)
 
     # ---- accents -----------------------------------------------------------
     def norm(acc: dict, target_l: float) -> str:
         l = clamp(0.55 * acc["l"] + 0.45 * target_l, 0.55, 0.84)
         s = clamp(acc["s"], 0.42, 0.80)
-        return lift_until_contrast(from_hls(acc["h"], l, s), background, 4.2)
+        return lift_until_contrast(from_hls(acc["h"], l, s), surface_background, 4.2)
 
     accent = norm(accents[0], 0.70)
     primary = norm(accents[1], 0.72)
     secondary = norm(accents[2], 0.72)
 
     # ---- ANSI matrix (semantic hues, pulled toward the photo) ---------------
+    # Red and blue are the exception: the terminal keeps them at their canonical
+    # hue with a high saturation floor, so the theme's red is red and its blue is
+    # blue. Their photo-pulled variants become surface_red / surface_blue for the
+    # desktop chrome.
     sources = [c["h"] for c in accents] + [v["h"] for v in a["vivid"][:6]]
     sat = clamp(0.34 + 0.40 * mood_sat, 0.34, 0.66)
     ansi: dict[str, str] = {}
+    surface_ansi: dict[str, str] = {}
     for role, deg, target_l in ANSI_ROLES:
-        h = pull_hue(deg / 360.0, sources)
-        col = from_hls(h, target_l, sat)
-        ansi[role] = lift_until_contrast(col, background, 4.8)
-        bright = from_hls(h, target_l + 0.14, clamp(sat + 0.06, 0, 0.75))
+        canonical = deg / 360.0
+        if role in TRUE_HUE_ROLES:
+            hue_deg, role_sat, col_l = TRUE_HUE_ROLES[role]
+            h = hue_deg / 360.0
+            bright = from_hls(h, col_l + 0.10, role_sat)
+            surface_ansi[role] = lift_until_contrast(
+                from_hls(pull_hue(canonical, sources), target_l, sat), surface_background, 4.8)
+        else:
+            role_sat, col_l = sat, target_l
+            h = pull_hue(canonical, sources)
+            bright = from_hls(h, target_l + 0.14, clamp(sat + 0.06, 0, 0.75))
+        ansi[role] = lift_until_contrast(from_hls(h, col_l, role_sat), background, 4.8)
         ansi["bright_" + role] = lift_until_contrast(bright, background, 4.8)
 
     yellow_h = pull_hue(43.0 / 360.0, sources)
@@ -282,10 +330,24 @@ def photo_palette(path: str) -> dict[str, str]:
     brown = from_hls(yellow_h, 0.45, sat * 0.55)
     orange = lift_until_contrast(orange, background, 4.5)
 
-    selection = mix(background, accent, 0.30)
+    # ---- terminal ink ------------------------------------------------------
+    # The terminal's default foreground is what file listings render regular
+    # file names with, so it is the same true red as the ANSI red. The dim role
+    # (color8, comments) is a dim red lifted until it reads on black.
+    foreground = ansi["red"]
+    bright_fg = ansi["bright_red"]
+    muted = lift_until_contrast(mix(foreground, background, 0.5), background, 4.5)
+
+    selection = mix(surface_background, accent, 0.30)
 
     p = {
         "background": background,
+        "surface_background": surface_background,
+        "surface_foreground": surface_foreground,
+        "surface_bright_foreground": surface_bright_foreground,
+        "surface_muted": surface_muted,
+        "surface_red": surface_ansi["red"],
+        "surface_blue": surface_ansi["blue"],
         "darker_background": darker,
         "dark_background": dark_bg,
         "lighter_background": lighter,
@@ -304,7 +366,7 @@ def photo_palette(path: str) -> dict[str, str]:
         "selection_foreground": bright_fg,
         "cursor": bright_fg,
         "hyprland_active_border": f"rgba({accent[1:]}ee) rgba({secondary[1:]}ee) rgba({primary[1:]}ee) 45deg",
-        "hyprland_inactive_border": f"rgba({muted[1:]}aa)",
+        "hyprland_inactive_border": f"rgba({surface_muted[1:]}aa)",
         "red": ansi["red"],
         "yellow": ansi["yellow"],
         "orange": orange,
@@ -371,11 +433,15 @@ COLORS_HEADER = """# ===========================================================
 #  Photo-derived palette · generated by tools/marin_generate.py
 #
 #  Source photo: {src}
-#  Background family, accents and the ANSI matrix are sampled from the photo
-#  itself, then normalized to the Marin Premium dark-mode targets:
-#    · background stays deep (L 0.085–0.125), never pure black
-#    · every ANSI colour holds >= 4.8:1 contrast on the background
-#    · accents keep Marin's rose/gold/lilac roles, hue-pulled to the photo
+#  The photo drives one palette; each surface then takes the part it needs:
+#    · background is true black — the terminal canvas; every ANSI colour holds
+#      >= 4.8:1 there
+#    · foreground is the same true red as the ANSI red: file listings render
+#      regular file names in the default foreground, and those read as red
+#    · red and blue keep their canonical hue instead of following the photo
+#    · surface_* keeps the photo-tinted desktop chrome (bar / menu / launcher /
+#      lock) the theme ships, retinted by tools/marin_generate.py
+#    · the remaining accents keep Marin's rose/gold/lilac roles, photo-pulled
 # ============================================================================
 """
 
@@ -397,9 +463,12 @@ SECTION_ANSI = """
 
 TOKEN_ORDER = [
     "mode",
-    "background", "darker_background", "dark_background", "lighter_background",
+    "background", "surface_background",
+    "darker_background", "dark_background", "lighter_background",
     "background_alt", "background_surface",
-    "foreground", "bright_foreground", "light_foreground", "dark_foreground", "muted",
+    "foreground", "surface_foreground", "bright_foreground", "surface_bright_foreground",
+    "light_foreground", "dark_foreground", "muted", "surface_muted",
+    "surface_red", "surface_blue",
     "accent", "primary", "secondary",
     "selection", "selection_background", "selection_foreground", "cursor",
     "hyprland_active_border", "hyprland_inactive_border",
@@ -433,6 +502,23 @@ def master_tokens() -> dict[str, str]:
         if m:
             tokens[m.group(1)] = m.group(2)
     return tokens
+
+
+def desktop_view(palette: dict[str, str]) -> dict[str, str]:
+    """The palette as the shipped desktop chrome sees it.
+
+    shell.toml / waybar.css / hyprland.conf are authored in the classic palette
+    and retinted by hex substitution. Swapping each role back to its `surface_*`
+    twin keeps the bar, menu, launcher and lock photo-tinted while the terminal
+    canvas stays black.
+    """
+    view = dict(palette)
+    for role, twin in DESKTOP_TWINS.items():
+        if twin in view:
+            view[role] = view[twin]
+    for twin in DESKTOP_TWINS.values():
+        view.pop(twin, None)
+    return view
 
 
 def substitute(text: str, old: dict[str, str], new: dict[str, str]) -> str:
@@ -471,7 +557,7 @@ def variant_header(kind: str, entry: dict, palette: dict[str, str]) -> str:
             "/* ============================================================================\n"
             f"   Marin Kitagawa — \"Marin Premium\" · {title}  ·  Waybar\n"
             "   Retinted from the wallpaper palette by tools/marin_generate.py\n"
-            f"   background {palette['background']} · accent {palette['accent']} · "
+            f"   surface {palette['surface_background']} · accent {palette['accent']} · "
             f"primary {palette['primary']} · secondary {palette['secondary']}\n"
             "   ========================================================================= */\n"
         )
@@ -479,7 +565,7 @@ def variant_header(kind: str, entry: dict, palette: dict[str, str]) -> str:
         "# ============================================================================\n"
         f"#  Marin Kitagawa — \"Marin Premium\" · {title}\n"
         f"#  Retinted from the wallpaper palette by tools/marin_generate.py\n"
-        f"#  background {palette['background']} · accent {palette['accent']} · "
+        f"#  surface {palette['surface_background']} · accent {palette['accent']} · "
         f"primary {palette['primary']} · secondary {palette['secondary']}\n"
         "# ============================================================================\n"
     )
@@ -508,7 +594,8 @@ def write_variant(entry: dict, master: dict[str, str], palette: dict[str, str],
         src = os.path.join(CLASSIC_DIR, name)
         if not os.path.exists(src):
             continue
-        text = substitute(open(src, encoding="utf-8").read(), master, palette)
+        text = substitute(open(src, encoding="utf-8").read(),
+                          desktop_view(master), desktop_view(palette))
         text = retint_header(text, variant_header(name, entry, palette))
         with open(os.path.join(vdir, name), "w", encoding="utf-8") as fh:
             fh.write(text)
@@ -679,7 +766,7 @@ def main() -> int:
                                    "green", "blue"))
 
         if not args.dry_run and not args.skip_wallpaper:
-            info["wallpaper"] = prepare_photo_wallpaper(entry, palette["background"], args.dry_run)
+            info["wallpaper"] = prepare_photo_wallpaper(entry, palette["surface_background"], args.dry_run)
             info["actions"].extend(info["wallpaper"]["actions"])
 
         report.append(info)

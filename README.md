@@ -13,12 +13,27 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 | Hair (honey blonde)       | `primary`     | `#e8c98f` | Titles, focused states           |
 | Eyes & makeup (rose pink) | `accent`      | `#f2a3c0` | Primary accent, focus borders    |
 | Accessories (lilac)       | `secondary`   | `#bba7e6` | Info chips, links                |
-| School uniform (deep navy)| `background`  | `#0f1522` | Base canvas                      |
+| School uniform (deep navy)| `surface_background` | `#0f1522` | Bar / menu / launcher / lock cards |
+| Terminal canvas           | `background`  | `#000000` | Terminal + editor background (true black) |
+| Terminal ink              | `foreground`  | `#f23636` | Terminal text — true red (file listings draw regular file names with it) |
+
+Every palette ships both halves: the **photo-tinted desktop chrome**
+(`surface_*`, used by `shell.toml`, `waybar.css` and `hyprland.conf`) and the
+**black terminal canvas with red ink** (`background`, `foreground`,
+`bright_foreground`, `muted`, driven straight into the terminal configs and the
+live Foot OSC retint).
 
 **Why "premium, low eye-strain":**
-- Every foreground sits at ≥ 7:1 contrast on the deepest navy.
+- The terminal is true black with **red ink** (`#f23636`): `eza`/`ls` draw
+  regular file names in the terminal's default foreground, so the file names
+  read as red instead of a mute rose.
+- Terminal **red and blue stay canonical** (`true red #f23636` / `clear blue
+  #4473f3`): the photo tints the rest of the ANSI matrix, but red must read as
+  red and blue as blue. Their photo-pulled twins (`surface_red`,
+  `surface_blue`) keep the desktop chrome's error and info hues dusty.
+- Every ink sits at ≥ 7:1 contrast on black; every ANSI colour at ≥ 5.9:1.
 - All accent colors are pulled ~10–15% toward warm/dusty to avoid LED glare.
-- No pure black, no pure white — only layered surfaces with depth.
+- No pure white anywhere — only layered surfaces with depth.
 - The active border is a **3-stop diagonal gradient** (pink → lilac → gold) flowing through Marin's full palette at 45°.
 
 ---
@@ -33,7 +48,8 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 | `waybar.css`     | Active Glassmorphism Waybar styles                                     |
 | `backgrounds/`   | 20 Marin wallpapers (1920×1080) — the theme's gallery                  |
 | `palettes/`      | 20 palette bundles; `marin-next` copies one to the root on switch      |
-| `tools/`         | `marin_generate.py` (palette generator) + `marin-next` (photo switcher) |
+| `tools/`         | `marin_generate.py` (palette generator), `marin-next` (photo switcher), `marin-bg-watch` (background watcher), `marin-bootstrap` (PATH + service install) |
+| `systemd/`       | `marin-premium-bg-sync.service` — keeps Omarchy's own picker in sync   |
 
 ---
 
@@ -42,9 +58,10 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 All 20 Marin photos live under the **single** `marin-premium` theme. Each photo
 has a palette bundle in `palettes/<num>-<slug>/`; `marin-next` copies the chosen
 bundle's `colors.toml` / `shell.toml` / `waybar.css` / `hyprland.conf` to the
-theme root, re-applies the theme — so Omarchy regenerates every terminal,
-editor, bar, menu, launcher and lock-screen config from that photo's palette —
-and then pins the matching wallpaper.
+theme root and re-applies the theme with `OMARCHY_THEME_SKIP_BACKGROUND=1`, so
+Omarchy regenerates every terminal, editor, bar, menu, launcher and lock-screen
+config from that photo's palette — and retints running Foot windows through
+OSC — **without** touching the wallpaper. It then pins the matching wallpaper.
 
 One roof holds everything: one theme entry, one gallery of 20 wallpapers, one
 palette per photo.
@@ -75,12 +92,39 @@ palette per photo.
 Switch photo + whole desktop palette together:
 
 ```bash
-marin-next          # next photo: wallpaper + every surface retinted
+marin-next          # next photo: wallpaper + terminal ink + menu retinted
 marin-next prev     # previous photo
 marin-next 20       # jump to photo #20
-marin-next bokeh    # jump by name match
+marin-next kimono   # jump by name match
 marin-next sync     # re-align palette with the current background
 ```
+
+`Super + Alt + B` (and `Super + Alt + Shift + B` for the previous photo) runs
+`marin-next` directly.
+
+### Omarchy's own picker counts too
+
+The stock background switcher — Omarchy menu → **Style → Background**, the image
+picker, `omarchy theme bg next` — only swaps the wallpaper; it never re-applies
+a theme. `~/.config/systemd/user/marin-premium-bg-sync.service` runs
+`marin-bg-watch`, which watches Omarchy's current-background symlink and calls
+`marin-next sync` whenever it points at a Marin photo. So a photo picked from
+Omarchy's own menu retints the terminal, the bar and the menu as well.
+
+`marin-next sync` is idempotent — when the staged palette already is the photo's
+palette it does nothing — so the two paths never fight, and a wallpaper that
+isn't part of the gallery (your own image, another theme) leaves the palette
+alone.
+
+```bash
+systemctl --user status marin-premium-bg-sync    # is the watcher running?
+systemctl --user restart marin-premium-bg-sync   # after editing the theme
+~/.config/omarchy/themes/marin-premium/install.sh --uninstall   # remove it
+```
+
+> Keep `~/.config/omarchy/backgrounds/marin-premium/` for photos that have a
+> matching bundle under `palettes/` only. A photo without a bundle has no
+> palette to sync to, so the previous photo's colours stay on screen.
 
 Regenerate the bundles and wallpapers after editing the classic master configs:
 
@@ -141,9 +185,11 @@ omarchy theme install https://github.com/l1secc/marin-premium.git
 
 `omarchy theme install` clones the repo and applies the theme in one go. Because
 Omarchy never runs code from a theme it installed, the second line is the
-one-time bootstrap that puts the photo switcher on your PATH. It is idempotent,
-and a `theme-set` hook keeps it current after `omarchy theme update` or a
-re-apply.
+one-time bootstrap: it puts the photo switcher (`marin-next`) and the background
+watcher (`marin-bg-watch`) on your PATH and starts the systemd user service that
+keeps Omarchy's own background picker in sync with the palette. It is
+idempotent, and a `theme-set` hook keeps all of it current after
+`omarchy theme update` or a re-apply.
 
 ### One command (clone + apply + bootstrap)
 
@@ -178,6 +224,54 @@ Adding this theme there is a PR that pairs a 16:9 preview image under
 
 ## Customization
 
+### Tweak the terminal (black canvas, red ink)
+
+The terminal canvas is `background` and the ink is `foreground` — the same true
+red as the ANSI red, because file listings draw regular file names with it. To
+change the ink, edit `photo_palette()` in `tools/marin_generate.py`:
+
+```python
+foreground = ansi["red"]           # ink = the true red
+bright_fg  = ansi["bright_red"]    # cursor / bold / color15
+muted = lift_until_contrast(mix(foreground, background, 0.5), background, 4.5)
+```
+
+Image file names (`*.jpg`, `*.webp`) are the ANSI **magenta** slot — Marin pink.
+To make those red as well, pin magenta like red and regenerate:
+
+```python
+TRUE_HUE_ROLES = {
+    "red":     (0.0, 0.88, 0.58),
+    "blue":    (224.0, 0.88, 0.55),
+    "magenta": (0.0, 0.88, 0.58),   # images render red too (color5 == color1)
+}
+```
+
+`color5` then equals `color1`, and the desktop's selected-row text follows
+`bright_magenta`, so add a `surface_bright_magenta` twin to `DESKTOP_TWINS` if
+the chrome should keep its pink.
+
+Red and blue ignore the photo on purpose — `TRUE_HUE_ROLES` holds their
+canonical hue, saturation and lightness, and `lift_until_contrast` keeps them
+at >= 4.8:1 on black:
+
+```python
+TRUE_HUE_ROLES = {
+    "red":  (0.0, 0.88, 0.58),   # (hue°, saturation, lightness) → #f23636
+    "blue": (224.0, 0.88, 0.55), #                              → #4473f3
+}
+```
+
+The desktop chrome keeps the photo tint through the `surface_*` twins
+(`surface_background`, `surface_foreground`, `surface_bright_foreground`,
+`surface_muted`, `surface_red`, `surface_blue`), which `tools/marin_generate.py`
+substitutes into `shell.toml`, `waybar.css` and `hyprland.conf`. Terminal roles
+and surface roles are independent: change `background` to tint the terminal,
+change `surface_background` to tint the bar and menu.
+
+Want the whole desktop black too? Point both at black in
+`palettes/01-marin-premium/colors.toml` and regenerate.
+
 ### Tweak the classic palette
 
 The root `colors.toml` is the *active* palette and is replaced on every
@@ -209,8 +303,8 @@ matching bundle under `palettes/` (or point `marin-next` at it). Cycle the
 gallery with `Super + Alt + Space` → Style → Background, or:
 
 ```bash
-omarchy theme bg next   # wallpaper only
-marin-next sync         # retint the desktop to that wallpaper
+omarchy theme bg next   # wallpaper only — the watcher syncs the palette
+marin-next sync         # or retint the desktop to that wallpaper by hand
 ```
 
 ---

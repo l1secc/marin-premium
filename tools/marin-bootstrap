@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# ============================================================================
+#  Marin Premium · switcher + background watcher bootstrap
+#
+#  Puts the photo switcher (`marin-next`) and the Omarchy background watcher
+#  (`marin-bg-watch`) on PATH, and installs the systemd user service that runs
+#  the watcher, so a photo picked from Omarchy's own background picker retints
+#  the terminal and the menu too.
+#
+#  Idempotent: safe to run from install.sh, from the theme-set hook after
+#  `omarchy theme update`, or by hand. Theme repos are not allowed to install
+#  code by themselves, so this is the one-time step that does it.
+#
+#  Usage:
+#    marin-bootstrap [--quiet] [--no-service] [--uninstall]
+# ============================================================================
+set -euo pipefail
+
+THEME_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+BIN_DIR="${XDG_BIN_HOME:-$HOME/.local/bin}"
+UNIT_NAME="marin-premium-bg-sync.service"
+UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+UNIT_FILE="$UNIT_DIR/$UNIT_NAME"
+
+QUIET=0
+WITH_SERVICE=1
+UNINSTALL=0
+for arg in "$@"; do
+  case "$arg" in
+    --quiet | -q) QUIET=1 ;;
+    --no-service) WITH_SERVICE=0 ;;
+    --uninstall) UNINSTALL=1 ;;
+    -h | --help) sed -n '3,16p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "Unknown option: $arg" >&2; exit 2 ;;
+  esac
+done
+
+say() { (( QUIET )) || printf '%s\n' "$*"; }
+
+if (( UNINSTALL )); then
+  systemctl --user disable --now "$UNIT_NAME" >/dev/null 2>&1 || true
+  rm -f "$UNIT_FILE" "$BIN_DIR/marin-next" "$BIN_DIR/marin-bg-watch"
+  systemctl --user daemon-reload >/dev/null 2>&1 || true
+  say "Removed marin-next, marin-bg-watch and $UNIT_NAME"
+  exit 0
+fi
+
+# 1. Switcher + watcher on PATH.
+mkdir -p "$BIN_DIR"
+for tool in marin-next marin-bg-watch; do
+  [[ -f $THEME_DIR/tools/$tool ]] || { echo "! missing $THEME_DIR/tools/$tool" >&2; exit 1; }
+  install -m755 "$THEME_DIR/tools/$tool" "$BIN_DIR/$tool"
+done
+say "✓ $BIN_DIR/marin-next"
+say "✓ $BIN_DIR/marin-bg-watch"
+
+# 2. systemd user service: retint when Omarchy's own picker changes the photo.
+if (( WITH_SERVICE )) && [[ -f $THEME_DIR/systemd/$UNIT_NAME ]] && command -v systemctl >/dev/null 2>&1; then
+  mkdir -p "$UNIT_DIR"
+  unit_tmp="$(mktemp)"
+  sed "s|@WATCHER@|$BIN_DIR/marin-bg-watch|" "$THEME_DIR/systemd/$UNIT_NAME" >"$unit_tmp"
+  if ! cmp -s "$unit_tmp" "$UNIT_FILE"; then
+    install -m644 "$unit_tmp" "$UNIT_FILE"
+    systemctl --user daemon-reload >/dev/null 2>&1 || true
+    say "✓ $UNIT_FILE"
+  fi
+  rm -f "$unit_tmp"
+  systemctl --user enable --now "$UNIT_NAME" >/dev/null 2>&1 || true
+  if systemctl --user is-active --quiet "$UNIT_NAME"; then
+    say "✓ $UNIT_NAME running"
+  else
+    say "! $UNIT_NAME could not be started (background photo changes will not retint until it runs)"
+  fi
+fi
+
+count=$(find "$THEME_DIR/palettes" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)
+say "Marin Premium: $count photos under one theme."

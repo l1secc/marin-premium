@@ -7,8 +7,8 @@
   "source": "01-marin-anime-art/marin_kitagawa_3965832.jpg",
   "source_root": "~/theme/marin_kitagawa",
   "palette": {
-    "background": "#211514",
-    "foreground": "#e1dbdb",
+    "background": "#000000",
+    "foreground": "#f23636",
     "accent": "#eaa36d",
     "primary": "#e5cb76",
     "secondary": "#e57678"

@@ -7,8 +7,8 @@
   "source": "03-wallpaper/marin_kitagawa_wallhaven-v9l83m.jpg",
   "source_root": "~/theme/marin_kitagawa",
   "palette": {
-    "background": "#241827",
-    "foreground": "#e0dbe1",
+    "background": "#000000",
+    "foreground": "#f23636",
     "accent": "#a7cff5",
     "primary": "#e29ca3",
     "secondary": "#9f6cc3"

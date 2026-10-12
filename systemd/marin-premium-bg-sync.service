@@ -1,0 +1,19 @@
+[Unit]
+Description=Marin Premium — retint the palette when the Omarchy background changes
+Documentation=https://github.com/l1secc/marin-premium
+# Omarchy's own background picker only swaps the wallpaper. This watcher keeps
+# the terminal, bar, menu, launcher and lock palette in step with the photo.
+# Wait for uwsm's imported session environment (WAYLAND_DISPLAY) so the shell
+# IPC and notifications reach the running desktop.
+After=graphical-session.target
+PartOf=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=@WATCHER@
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target
