@@ -1,0 +1,81 @@
+# ============================================================================
+#  Marin Kitagawa — "Marin Premium"  ·  Omarchy Dark Mode
+#  Professional anime aesthetic · low eye-strain · high contrast
+# ============================================================================
+
+mode = "dark"
+
+# ---------------------------------------------------------------------------
+#  THEME  ·  core surface + accent tokens
+# ---------------------------------------------------------------------------
+
+# Deep school-uniform navy (background family)
+background         = "#0f1522"
+darker_background  = "#0a0e18"
+dark_background    = "#141c2e"
+lighter_background = "#1b2540"
+background_alt     = "#0c111c"
+background_surface = "#182237"
+
+# Text
+foreground         = "#d9dfee"
+bright_foreground   = "#eef2fb"
+light_foreground   = "#c3cbdf"
+dark_foreground    = "#6d7890"
+muted              = "#5a6580"
+
+# Accents  ·  Marin pink / blonde gold / lilac
+accent      = "#f2a3c0"   # Marin pink — eyes + makeup
+primary     = "#e8c98f"   # blonde gold — hair
+secondary   = "#bba7e6"   # lilac — accessories
+
+# Selection + cursor
+selection            = "#2b3754"
+selection_background = "#2b3754"
+selection_foreground = "#eef2fb"
+cursor               = "#eef2fb"
+
+# Hyprland active-border gradient (pink -> gold @ 45deg)
+hyprland_active_border   = "rgba(f2a3c0ee) rgba(e8c98fee) 45deg"
+hyprland_inactive_border = "rgba(5a6580aa)"
+
+# ---------------------------------------------------------------------------
+#  COLORS  ·  semantic palette (syntax-highlight friendly)
+# ---------------------------------------------------------------------------
+
+red     = "#e06c8a"   # rose red — errors, stays legible on navy
+yellow  = "#e8c98f"   # blonde gold
+orange  = "#eab384"   # soft apricot
+green   = "#a3cdb0"   # sage mint — comments/strings read cleanly
+cyan    = "#9ad0d8"   # soft aqua
+blue    = "#8fb2e8"   # periwinkle
+magenta = "#f2a3c0"   # Marin pink
+brown   = "#a07a58"
+
+bright_red     = "#f0a5b8"
+bright_yellow  = "#f2d8a8"
+bright_green   = "#c4e1ce"
+bright_cyan    = "#bde4e6"
+bright_blue    = "#b6c8f0"
+bright_magenta = "#f7c2d9"
+
+# ---------------------------------------------------------------------------
+#  ANSI 0-15  ·  terminal color matrix
+# ---------------------------------------------------------------------------
+
+color0  = "#0f1522"
+color1  = "#e06c8a"
+color2  = "#a3cdb0"
+color3  = "#e8c98f"
+color4  = "#8fb2e8"
+color5  = "#f2a3c0"
+color6  = "#9ad0d8"
+color7  = "#d9dfee"
+color8  = "#5a6580"
+color9  = "#f0a5b8"
+color10 = "#c4e1ce"
+color11 = "#f2d8a8"
+color12 = "#b6c8f0"
+color13 = "#f7c2d9"
+color14 = "#bde4e6"
+color15 = "#eef2fb"

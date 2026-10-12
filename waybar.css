@@ -1,0 +1,164 @@
+/* ============================================================================
+   Marin Kitagawa — "Marin Premium"  ·  Waybar
+   Glassmorphism · navy surface · pink / gold / lilac accents
+   ========================================================================== */
+
+@define-color background      #0f1522;
+@define-color background-alt  #141c2e;
+@define-color surface         rgba(20, 28, 46, 0.55);
+@define-color foreground      #d9dfee;
+@define-color muted           #6d7890;
+@define-color pink            #f2a3c0;
+@define-color pink-bright     #f7c2d9;
+@define-color gold            #e8c98f;
+@define-color gold-bright     #f2d8a8;
+@define-color lilac           #bba7e6;
+@define-color rose            #e06c8a;
+@define-color border          rgba(242, 163, 192, 0.35);
+@define-color shadow          rgba(0, 0, 0, 0.45);
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", monospace;
+    font-size: 13px;
+    min-height: 0;
+}
+
+/* Bar itself: transparent so the blurred cards float on the desktop */
+window#waybar {
+    background: transparent;
+    color: @foreground;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Module groups — frosted glass cards                                */
+/* ------------------------------------------------------------------ */
+.modules-left,
+.modules-center,
+.modules-right {
+    background: @surface;
+    border: 1px solid @border;
+    border-radius: 12px;
+    margin: 6px 8px;
+    padding: 0 10px;
+    box-shadow: 0 4px 16px @shadow;
+}
+
+/* iOS-style backdrop blur (works where a compositor provides it) */
+window#waybar {
+    background: rgba(15, 21, 34, 0.35);
+}
+
+#workspaces,
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray,
+#custom-* {
+    background: transparent;
+    padding: 0 10px;
+    margin: 0 2px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Workspaces — the active one glows pink→gold                        */
+/* ------------------------------------------------------------------ */
+#workspaces button {
+    padding: 0 8px;
+    color: @muted;
+    background: transparent;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(242, 163, 192, 0.14);
+    color: @pink-bright;
+    border-color: rgba(242, 163, 192, 0.30);
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, rgba(242, 163, 192, 0.28), rgba(232, 201, 143, 0.28));
+    color: @foreground;
+    border: 1px solid @border;
+}
+
+#workspaces button.urgent {
+    background: rgba(224, 108, 138, 0.35);
+    color: @rose;
+    border: 1px solid rgba(224, 108, 138, 0.55);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Widgets                                                            */
+/* ------------------------------------------------------------------ */
+#window {
+    color: @foreground;
+    font-weight: 600;
+}
+
+#clock {
+    color: @gold;
+    font-weight: 700;
+}
+
+#clock.date {
+    color: @foreground;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @lilac;
+}
+
+#battery.warning:not(.charging) {
+    color: @gold;
+}
+
+#battery.critical:not(.charging) {
+    color: @rose;
+    animation: blink 1s infinite;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+    color: @muted;
+}
+
+#cpu,
+#memory,
+#temperature {
+    color: @lilac;
+}
+
+#tray {
+    color: @foreground;
+}
+
+@keyframes blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Tooltip                                                            */
+/* ------------------------------------------------------------------ */
+tooltip {
+    background: rgba(20, 28, 46, 0.92);
+    border: 1px solid @border;
+    border-radius: 10px;
+    color: @foreground;
+}
+
+tooltip label {
+    padding: 6px 10px;
+}
