@@ -31,22 +31,22 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 | `hyprland.conf`  | Active window manager: gradient border, blur, shadows, animations      |
 | `shell.toml`     | Active Omarchy bar / OSD / launcher / menu / lock surfaces             |
 | `waybar.css`     | Active Glassmorphism Waybar styles                                     |
-| `backgrounds/`   | 23 Marin wallpapers (1920×1080) — the theme's gallery                  |
-| `palettes/`      | 23 palette bundles; `marin-next` copies one to the root on switch      |
+| `backgrounds/`   | 35 Marin wallpapers (1920×1080) — the theme's gallery                  |
+| `palettes/`      | 35 palette bundles; `marin-next` copies one to the root on switch      |
 | `tools/`         | `marin_generate.py` (palette generator) + `marin-next` (photo switcher) |
 
 ---
 
 ## One theme, all photos
 
-All 23 Marin photos live under the **single** `marin-premium` theme. Each photo
+All 35 Marin photos live under the **single** `marin-premium` theme. Each photo
 has a palette bundle in `palettes/<num>-<slug>/`; `marin-next` copies the chosen
 bundle's `colors.toml` / `shell.toml` / `waybar.css` / `hyprland.conf` to the
 theme root, re-applies the theme — so Omarchy regenerates every terminal,
 editor, bar, menu, launcher and lock-screen config from that photo's palette —
 and then pins the matching wallpaper.
 
-One roof holds everything: one theme entry, one gallery of 23 wallpapers, one
+One roof holds everything: one theme entry, one gallery of 35 wallpapers, one
 palette per photo.
 
 | # | Title | Palette bundle |
@@ -74,6 +74,18 @@ palette per photo.
 | 21 | Altın Gyaru | `palettes/21-marin-premium-21-altin` |
 | 22 | Bokeh Gülüş | `palettes/22-marin-premium-22-bokeh` |
 | 23 | Şeytani Marin | `palettes/23-marin-premium-23-seytan` |
+| 24 | Zarif Duruş | `palettes/24-marin-premium-24-zarif` |
+| 25 | Çantalı Şehir | `palettes/25-marin-premium-25-canta` |
+| 26 | Saç Savurma | `palettes/26-marin-premium-26-sac` |
+| 27 | Sakura Korkuluk | `palettes/27-marin-premium-27-sakura` |
+| 28 | Yakın Bakış | `palettes/28-marin-premium-28-yakin` |
+| 29 | Kırmızı Işık | `palettes/29-marin-premium-29-kirmizi` |
+| 30 | Deniz Serinliği | `palettes/30-marin-premium-30-deniz` |
+| 31 | Su Kenarı | `palettes/31-marin-premium-31-su` |
+| 32 | Selfie | `palettes/32-marin-premium-32-selfie` |
+| 33 | Sıcak Gülüş | `palettes/33-marin-premium-33-sicak` |
+| 34 | Havai Fişek Kimono | `palettes/34-marin-premium-34-fiskiye` |
+| 35 | Figür Keyfi | `palettes/35-marin-premium-35-figur` |
 
 Switch photo + whole desktop palette together:
 
@@ -97,7 +109,7 @@ python3 tools/marin_generate.py --dry-run       # check palettes without writing
 
 ## Backgrounds
 
-The single theme ships **23 Marin wallpapers** in `backgrounds/`. Each is
+The single theme ships **35 Marin wallpapers** in `backgrounds/`. Each is
 1920×1080, cropped to 16:9 and given a photo-tinted top scrim so the bar stays
 readable. The earlier near-black procedural `BG1–BG6` backgrounds were removed.
 
@@ -115,7 +127,9 @@ Marin Kitagawa's character design is the copyrighted work of **Shinichi Fukuda**
 themes are a personal wallpaper set; the artwork belongs to its original creators and
 is used locally for a personal desktop only, **not** for redistribution of the art.
 
-If you want to add your own wallpaper to the gallery instead:
+If you want to add your own wallpaper to the gallery instead, see
+[CREDITS.md](CREDITS.md) for the provenance of the bundled artwork and drop your
+file in `backgrounds/`:
 
 ```bash
 # Drop the file into the theme's backgrounds folder (PNG/JPG/WEBP works)
@@ -169,7 +183,7 @@ omarchy theme set "Marin Premium"
 The built-in picker reads the community list from
 [omarchy-site](https://github.com/omacom/omarchy-site) `src/data/themes.json`.
 Adding this theme there is a PR that pairs a 16:9 preview image under
-`public/assets/themes/` with one entry:
+`assets/themes/` with one entry:
 
 ```json
 { "repo": "https://github.com/l1secc/marin-premium", "image": "/assets/themes/marin-premium.webp", "name": "Marin Premium" }

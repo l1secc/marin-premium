@@ -1,0 +1,17 @@
+{
+  "num": "25",
+  "slug": "marin-premium-25-canta",
+  "theme": "Marin Premium 25 Canta",
+  "title": "Çantalı Şehir",
+  "wallpaper": "Marin-25-city-bag.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3979486.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#261a18",
+    "foreground": "#e1dcdb",
+    "accent": "#d6a49a",
+    "primary": "#d7ba9d",
+    "secondary": "#70b2c4"
+  },
+  "generator": "tools/marin_generate.py"
+}

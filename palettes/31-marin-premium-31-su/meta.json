@@ -1,0 +1,17 @@
+{
+  "num": "31",
+  "slug": "marin-premium-31-su",
+  "theme": "Marin Premium 31 Su",
+  "title": "Su Kenarı",
+  "wallpaper": "Marin-31-waterside.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3980735.png",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#271b19",
+    "foreground": "#e1dbdb",
+    "accent": "#f5afa3",
+    "primary": "#ead298",
+    "secondary": "#9fd3dd"
+  },
+  "generator": "tools/marin_generate.py"
+}

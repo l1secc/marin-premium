@@ -1,0 +1,17 @@
+{
+  "num": "32",
+  "slug": "marin-premium-32-selfie",
+  "theme": "Marin Premium 32 Selfie",
+  "title": "Selfie",
+  "wallpaper": "Marin-32-selfie.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3988252.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#251d18",
+    "foreground": "#e1dddb",
+    "accent": "#e4d1b8",
+    "primary": "#e4e0bc",
+    "secondary": "#b7d5e2"
+  },
+  "generator": "tools/marin_generate.py"
+}

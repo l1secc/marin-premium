@@ -1,0 +1,17 @@
+{
+  "num": "34",
+  "slug": "marin-premium-34-fiskiye",
+  "theme": "Marin Premium 34 Fiskiye",
+  "title": "Havai Fişek Kimono",
+  "wallpaper": "Marin-34-fireworks-kimono.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3972023.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#211417",
+    "foreground": "#e1dbdc",
+    "accent": "#dda4a7",
+    "primary": "#dcb8aa",
+    "secondary": "#dcaac2"
+  },
+  "generator": "tools/marin_generate.py"
+}

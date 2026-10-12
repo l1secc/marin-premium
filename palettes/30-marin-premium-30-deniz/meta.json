@@ -1,0 +1,17 @@
+{
+  "num": "30",
+  "slug": "marin-premium-30-deniz",
+  "theme": "Marin Premium 30 Deniz",
+  "title": "Deniz Serinliği",
+  "wallpaper": "Marin-30-sea-breeze.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_3980236.png",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#161c27",
+    "foreground": "#dbdde1",
+    "accent": "#b4d1e7",
+    "primary": "#e4bfa2",
+    "secondary": "#dba8b7"
+  },
+  "generator": "tools/marin_generate.py"
+}

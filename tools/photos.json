@@ -231,6 +231,126 @@
       "src": "01-marin-anime-art/marin_kitagawa_3985428.jpg",
       "focus": "north:0.0",
       "palette": "photo"
+    },
+    {
+      "num": "24",
+      "slug": "marin-premium-24-zarif",
+      "name": "Marin Premium 24 Zarif",
+      "title": "Zarif Duruş",
+      "file": "Marin-24-elegant-pose",
+      "src": "01-marin-anime-art/marin_kitagawa_3991854.png",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "25",
+      "slug": "marin-premium-25-canta",
+      "name": "Marin Premium 25 Canta",
+      "title": "Çantalı Şehir",
+      "file": "Marin-25-city-bag",
+      "src": "01-marin-anime-art/marin_kitagawa_3979486.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "26",
+      "slug": "marin-premium-26-sac",
+      "name": "Marin Premium 26 Sac",
+      "title": "Saç Savurma",
+      "file": "Marin-26-hair-swish",
+      "src": "01-marin-anime-art/marin_kitagawa_3967999.jpg",
+      "focus": "north:0.03",
+      "palette": "photo"
+    },
+    {
+      "num": "27",
+      "slug": "marin-premium-27-sakura",
+      "name": "Marin Premium 27 Sakura",
+      "title": "Sakura Korkuluk",
+      "file": "Marin-27-sakura-rail",
+      "src": "01-marin-anime-art/marin_kitagawa_3974195.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "28",
+      "slug": "marin-premium-28-yakin",
+      "name": "Marin Premium 28 Yakin",
+      "title": "Yakın Bakış",
+      "file": "Marin-28-closeup",
+      "src": "01-marin-anime-art/marin_kitagawa_3974199.jpg",
+      "focus": "center",
+      "palette": "photo"
+    },
+    {
+      "num": "29",
+      "slug": "marin-premium-29-kirmizi",
+      "name": "Marin Premium 29 Kirmizi",
+      "title": "Kırmızı Işık",
+      "file": "Marin-29-red-light",
+      "src": "01-marin-anime-art/marin_kitagawa_3966273.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "30",
+      "slug": "marin-premium-30-deniz",
+      "name": "Marin Premium 30 Deniz",
+      "title": "Deniz Serinliği",
+      "file": "Marin-30-sea-breeze",
+      "src": "01-marin-anime-art/marin_kitagawa_3980236.png",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "31",
+      "slug": "marin-premium-31-su",
+      "name": "Marin Premium 31 Su",
+      "title": "Su Kenarı",
+      "file": "Marin-31-waterside",
+      "src": "01-marin-anime-art/marin_kitagawa_3980735.png",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "32",
+      "slug": "marin-premium-32-selfie",
+      "name": "Marin Premium 32 Selfie",
+      "title": "Selfie",
+      "file": "Marin-32-selfie",
+      "src": "01-marin-anime-art/marin_kitagawa_3988252.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "33",
+      "slug": "marin-premium-33-sicak",
+      "name": "Marin Premium 33 Sicak",
+      "title": "Sıcak Gülüş",
+      "file": "Marin-33-warm-smile",
+      "src": "01-marin-anime-art/marin_kitagawa_4001642.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
+    },
+    {
+      "num": "34",
+      "slug": "marin-premium-34-fiskiye",
+      "name": "Marin Premium 34 Fiskiye",
+      "title": "Havai Fişek Kimono",
+      "file": "Marin-34-fireworks-kimono",
+      "src": "01-marin-anime-art/marin_kitagawa_3972023.jpg",
+      "focus": "north:0.0",
+      "palette": "photo"
+    },
+    {
+      "num": "35",
+      "slug": "marin-premium-35-figur",
+      "name": "Marin Premium 35 Figur",
+      "title": "Figür Keyfi",
+      "file": "Marin-35-figurine",
+      "src": "01-marin-anime-art/marin_kitagawa_3965908.jpg",
+      "focus": "north:0.02",
+      "palette": "photo"
     }
   ]
 }
