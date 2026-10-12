@@ -8,7 +8,7 @@
   "source_root": "~/theme/marin_kitagawa",
   "palette": {
     "background": "#000000",
-    "foreground": "#f23636",
+    "foreground": "#ffffff",
     "accent": "#c18c67",
     "primary": "#c2ab6b",
     "secondary": "#d1ce8e"

@@ -1,31 +1,26 @@
 /* ============================================================================
-   Marin Kitagawa — "Marin Premium"  ·  Waybar
-   Glassmorphism · navy surface · pink / gold / lilac accents
-   ----------------------------------------------------------------------------
-   Design intent:
-     · Frosted-glass modules (modules-left/center/right) float on the desktop.
-     · Active workspace glows pink → gold (gradient wash).
-     · Per-module color hints (clock = gold, network/cpu = lilac, battery = pink).
-     · Typography: Nerd Font mono, 13 px, weight 500 base.
-   ========================================================================== */
+   Marin Kitagawa — "Marin Premium" · Deniz Esintisi  ·  Waybar
+   Retinted from the wallpaper palette by tools/marin_generate.py
+   surface #261d19 · accent #dcae94 · primary #dac69a · secondary #a6cadc
+   ========================================================================= */
 
-@define-color background      #0f1522;
-@define-color background-alt  #141c2e;
-@define-color surface         rgba(20, 28, 46, 0.55);
-@define-color surface-hi      rgba(27, 37, 64, 0.65);
-@define-color foreground      #d9dfee;
-@define-color muted           #6d7890;
-@define-color pink            #f2a3c0;
-@define-color pink-bright     #f7c2d9;
-@define-color gold            #e8c98f;
-@define-color gold-bright     #f2d8a8;
-@define-color lilac           #bba7e6;
+@define-color background      #261d19;
+@define-color background-alt  #31261f;
+@define-color surface         rgba(49, 38, 31, 0.55);
+@define-color surface-hi      rgba(66, 51, 42, 0.65);
+@define-color foreground      #e1dddb;
+@define-color muted           #a18678;
+@define-color pink            #dcae94;
+@define-color pink-bright     #efc7c8;
+@define-color gold            #dac69a;
+@define-color gold-bright     #efe3c7;
+@define-color lilac           #a6cadc;
 @define-color lilac-bright    #d2c4f0;
-@define-color rose            #e06c8a;
-@define-color sage            #a3cdb0;
-@define-color periwinkle       #8fb2e8;
-@define-color border          rgba(242, 163, 192, 0.35);
-@define-color border-soft     rgba(187, 167, 230, 0.18);
+@define-color rose            #d17374;
+@define-color sage            #84d7cf;
+@define-color periwinkle       #8cacd9;
+@define-color border          rgba(220, 174, 148, 0.35);
+@define-color border-soft     rgba(166, 202, 220, 0.18);
 @define-color shadow          rgba(0, 0, 0, 0.45);
 
 * {
@@ -45,7 +40,7 @@ window#waybar {
 }
 
 window#waybar:placeholder {
-    background: rgba(15, 21, 34, 0.35);
+    background: rgba(38, 29, 25, 0.35);
 }
 
 /* ------------------------------------------------------------------ */
@@ -102,29 +97,29 @@ window#waybar:placeholder {
 }
 
 #workspaces button:hover {
-    background: rgba(242, 163, 192, 0.12);
+    background: rgba(220, 174, 148, 0.12);
     color: @pink-bright;
-    border-color: rgba(242, 163, 192, 0.25);
-    box-shadow: 0 0 12px rgba(242, 163, 192, 0.20);
+    border-color: rgba(220, 174, 148, 0.25);
+    box-shadow: 0 0 12px rgba(220, 174, 148, 0.20);
 }
 
 #workspaces button.active {
     background: linear-gradient(
         135deg,
-        rgba(242, 163, 192, 0.32),
-        rgba(232, 201, 143, 0.32)
+        rgba(220, 174, 148, 0.32),
+        rgba(218, 198, 154, 0.32)
     );
     color: @foreground;
-    border: 1px solid rgba(242, 163, 192, 0.55);
+    border: 1px solid rgba(220, 174, 148, 0.55);
     box-shadow:
-        0 0 16px rgba(242, 163, 192, 0.22),
+        0 0 16px rgba(220, 174, 148, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 #workspaces button.urgent {
-    background: rgba(224, 108, 138, 0.32);
+    background: rgba(209, 115, 116, 0.32);
     color: @rose;
-    border: 1px solid rgba(224, 108, 138, 0.55);
+    border: 1px solid rgba(209, 115, 116, 0.55);
     animation: urgent-pulse 1.2s ease-in-out infinite;
 }
 
@@ -146,7 +141,7 @@ window#waybar:placeholder {
     color: @gold-bright;
     font-weight: 700;
     font-size: 13.5px;
-    text-shadow: 0 0 8px rgba(232, 201, 143, 0.20);
+    text-shadow: 0 0 8px rgba(218, 198, 154, 0.20);
 }
 
 #clock.date {
@@ -212,7 +207,7 @@ window#waybar:placeholder {
 
 /* Tooltip */
 tooltip {
-    background: rgba(20, 28, 46, 0.92);
+    background: rgba(49, 38, 31, 0.92);
     border: 1px solid @border;
     border-radius: 10px;
     color: @foreground;

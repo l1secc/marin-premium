@@ -1,45 +1,45 @@
 # ============================================================================
-#  Marin Kitagawa — "Marin Premium"  ·  Omarchy Quattro shell surfaces
-#  Glassmorphism-leaning navy surfaces with pink / gold / lilac accents.
-#  Every surface uses translucent navy so the desktop can breathe through.
+#  Marin Kitagawa — "Marin Premium" · Deniz Esintisi
+#  Retinted from the wallpaper palette by tools/marin_generate.py
+#  surface #261d19 · accent #dcae94 · primary #dac69a · secondary #a6cadc
 # ============================================================================
 
 [bar]
-background       = "#0f1522"
+background       = "#261d19"
 background-alpha = 0.88
-text             = "#d9dfee"
-active           = "#f2a3c0"
+text             = "#e1dddb"
+active           = "#dcae94"
 scale-with-font  = true
 size-horizontal  = 30
 size-vertical    = 32
 
 [hyprland]
 # Same 3-stop gradient as the active window border — visual unity
-active-border            = "rgba(f2a3c0ee) rgba(bba7e6ee) rgba(e8c98fee) 45deg"
-active-border-foreground = "#f2a3c0"
+active-border            = "rgba(dcae94ee) rgba(a6cadcee) rgba(dac69aee) 45deg"
+active-border-foreground = "#dcae94"
 
 [controls]
-normal-color        = "#c3cbdf"
+normal-color        = "#d1c7c2"
 normal-fill-alpha   = 0.05
-normal-border       = "#c3cbdf"
+normal-border       = "#d1c7c2"
 normal-border-width = 1
 normal-border-alpha = 0.30
 
-hover-cursor-color        = "#eef2fb"
+hover-cursor-color        = "#f3f2f2"
 hover-cursor-fill-alpha   = 0.10
-hover-cursor-border       = "#f2a3c0"
+hover-cursor-border       = "#dcae94"
 hover-cursor-border-width = 1
 hover-cursor-border-alpha = 0.55
 
-focus-color        = "#f2a3c0"
+focus-color        = "#dcae94"
 focus-fill-alpha   = 0.12
-focus-border       = "#f2a3c0"
+focus-border       = "#dcae94"
 focus-border-width = 1
 focus-border-alpha = 0.85
 
-selected-color        = "#e8c98f"
+selected-color        = "#dac69a"
 selected-fill-alpha   = 0.18
-selected-border       = "#e8c98f"
+selected-border       = "#dac69a"
 selected-border-width = 1
 selected-border-alpha = 0.60
 
@@ -54,92 +54,92 @@ scale-with-font  = true
 base-size = 12
 
 [popups]
-background       = "#141c2e"
+background       = "#31261f"
 background-alpha = 0.92
-text             = "#d9dfee"
+text             = "#e1dddb"
 border           = "hyprland.active-border"
 border-alpha     = 1.0
 border-width     = 2
 
 [tooltip]
-background       = "#141c2e"
+background       = "#31261f"
 background-alpha = 0.92
-text             = "#eef2fb"
-border           = "#f2a3c0"
+text             = "#f3f2f2"
+border           = "#dcae94"
 border-alpha     = 1.0
 border-width     = 1
 
 [notifications]
-background       = "#141c2e"
+background       = "#31261f"
 background-alpha = 0.92
-text             = "#d9dfee"
+text             = "#e1dddb"
 border           = "hyprland.active-border"
 border-alpha     = 1.0
 border-width     = 2
-countdown        = "#f2a3c0"
+countdown        = "#dcae94"
 
 [launcher]
-background                = "#0f1522"
+background                = "#261d19"
 background-alpha          = 0.95
-text                      = "#eef2fb"
-border                    = "#f2a3c0"
+text                      = "#f3f2f2"
+border                    = "#dcae94"
 border-alpha              = 1.0
-scrim                     = "#0f1522"
+scrim                     = "#261d19"
 scrim-alpha               = 0.55
-selected-background       = "#2b3754"
+selected-background       = "#5d483e"
 selected-background-alpha = 0.30
-selected-text             = "#f7c2d9"
-selected-border           = "#f2a3c0"
+selected-text             = "#efc7c8"
+selected-border           = "#dcae94"
 selected-border-alpha     = 0.94
 selected-border-width     = 1
 
 [menu]
-background                = "#0f1522"
+background                = "#261d19"
 background-alpha          = 0.95
-text                      = "#eef2fb"
-border                    = "#f2a3c0"
+text                      = "#f3f2f2"
+border                    = "#dcae94"
 border-alpha              = 1.0
-scrim                     = "#0f1522"
+scrim                     = "#261d19"
 scrim-alpha               = 0.55
-selected-background       = "#2b3754"
+selected-background       = "#5d483e"
 selected-background-alpha = 0.30
-selected-text             = "#f7c2d9"
-selected-border           = "#f2a3c0"
+selected-text             = "#efc7c8"
+selected-border           = "#dcae94"
 selected-border-alpha     = 0.94
 selected-border-width     = 1
 
 [polkit]
-background       = "#0f1522"
+background       = "#261d19"
 background-alpha = 0.95
-text             = "#d9dfee"
-text-error       = "#e06c8a"
+text             = "#e1dddb"
+text-error       = "#d17374"
 border           = "hyprland.active-border"
-border-error     = "#e06c8a"
+border-error     = "#d17374"
 border-alpha     = 1.0
 border-width     = 2
-scrim            = "#0f1522"
+scrim            = "#261d19"
 scrim-alpha      = 0.5
-accent           = "#f2a3c0"
+accent           = "#dcae94"
 
 [lock]
-background       = "#0f1522"
+background       = "#261d19"
 background-alpha = 0.80
-text             = "#d9dfee"
-placeholder      = "#6d7890"
-text-error       = "#e06c8a"
+text             = "#e1dddb"
+placeholder      = "#a18678"
+text-error       = "#d17374"
 border           = "hyprland.active-border"
 border-active    = "hyprland.active-border"
-border-error     = "#e06c8a"
+border-error     = "#d17374"
 border-alpha     = 1.0
 border-width     = 2
-selection        = "#f2a3c0"
+selection        = "#dcae94"
 selection-alpha  = 0.45
 
 [image-picker]
-scrim                   = "#0f1522"
+scrim                   = "#261d19"
 scrim-alpha             = "0.5"
-text                    = "#d9dfee"
-selected-border         = "#f2a3c0"
+text                    = "#e1dddb"
+selected-border         = "#dcae94"
 selected-border-alpha   = 1.0
-unselected-border       = "#c3cbdf"
+unselected-border       = "#d1c7c2"
 unselected-border-alpha = 0.28

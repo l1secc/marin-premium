@@ -16,7 +16,7 @@
 @define-color gold-bright     #eee3c8;
 @define-color lilac           #baa8db;
 @define-color lilac-bright    #d2c4f0;
-@define-color rose            #cc7270;
+@define-color rose            #cc7075;
 @define-color sage            #87d4ce;
 @define-color periwinkle       #8e9dd7;
 @define-color border          rgba(176, 214, 236, 0.35);
@@ -117,9 +117,9 @@ window#waybar:placeholder {
 }
 
 #workspaces button.urgent {
-    background: rgba(204, 114, 112, 0.32);
+    background: rgba(204, 112, 117, 0.32);
     color: @rose;
-    border: 1px solid rgba(204, 114, 112, 0.55);
+    border: 1px solid rgba(204, 112, 117, 0.55);
     animation: urgent-pulse 1.2s ease-in-out infinite;
 }
 

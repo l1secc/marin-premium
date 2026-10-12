@@ -45,9 +45,11 @@ BG_DIR = os.path.join(MASTER_DIR, "backgrounds")
 MASTER_COLORS = os.path.join(CLASSIC_DIR, "colors.toml")
 TEMPLATE_FILES = ("shell.toml", "waybar.css", "hyprland.conf")
 
-# The terminal canvas is true black; Marin's colour lives in the ink, the
-# desktop chrome and the per-photo accents.
+# The terminal canvas is true black and its ink is plain white — that is what
+# you type and what command output is drawn in. Marin's colour lives in the
+# accents, the desktop chrome and the photo-tinted file-kind colours.
 TERMINAL_BACKGROUND = "#000000"
+TERMINAL_FOREGROUND = "#ffffff"
 
 # Roles whose terminal value differs from the desktop value carry a `surface_*`
 # twin in colors.toml holding the value the shipped desktop chrome was authored
@@ -66,7 +68,7 @@ AR = W / H
 # Canonical Marin ANSI hue anchors (degrees) used as the semantic skeleton that
 # each photo is allowed to pull toward its own colours.
 ANSI_ROLES = [
-    ("red", 347.0, 0.62),
+    ("red", 338.0, 0.62),
     ("yellow", 43.0, 0.72),
     ("green", 148.0, 0.68),
     ("cyan", 187.0, 0.70),
@@ -74,13 +76,13 @@ ANSI_ROLES = [
     ("magenta", 335.0, 0.72),
 ]
 
-# Roles the terminal keeps at their *canonical* hue with a high saturation
-# floor, so its red reads as red and its blue reads as blue instead of being
-# pulled to dusty rose / periwinkle by the photo: (hue, saturation, lightness).
+# Roles the terminal keeps at a fixed, high-saturation Marin hue instead of
+# being pulled to a dusty tone by the photo, so the red slot reads as Marin's
+# rose-pink and the blue slot as a clear blue: (hue, saturation, lightness).
 # The photo-pulled variant, at the role's own ANSI_ROLES hue and lightness,
 # survives as surface_red / surface_blue for the desktop chrome.
 TRUE_HUE_ROLES = {
-    "red": (0.0, 0.88, 0.58),
+    "red": (338.0, 0.85, 0.60),
     "blue": (224.0, 0.88, 0.55),
 }
 
@@ -302,10 +304,10 @@ def photo_palette(path: str) -> dict[str, str]:
     secondary = norm(accents[2], 0.72)
 
     # ---- ANSI matrix (semantic hues, pulled toward the photo) ---------------
-    # Red and blue are the exception: the terminal keeps them at their canonical
-    # hue with a high saturation floor, so the theme's red is red and its blue is
-    # blue. Their photo-pulled variants become surface_red / surface_blue for the
-    # desktop chrome.
+    # Rose-pink and blue are the exception: the terminal keeps them at a fixed,
+    # high-saturation Marin hue, so the theme's red slot reads as Marin's vivid
+    # rose-pink and its blue as a clear blue. Their photo-pulled variants become
+    # surface_red / surface_blue for the desktop chrome.
     sources = [c["h"] for c in accents] + [v["h"] for v in a["vivid"][:6]]
     sat = clamp(0.34 + 0.40 * mood_sat, 0.34, 0.66)
     ansi: dict[str, str] = {}
@@ -331,11 +333,13 @@ def photo_palette(path: str) -> dict[str, str]:
     orange = lift_until_contrast(orange, background, 4.5)
 
     # ---- terminal ink ------------------------------------------------------
-    # The terminal's default foreground is what file listings render regular
-    # file names with, so it is the same true red as the ANSI red. The dim role
-    # (color8, comments) is a dim red lifted until it reads on black.
-    foreground = ansi["red"]
-    bright_fg = ansi["bright_red"]
+    # Plain white: the terminal's default foreground is what you type and what
+    # command output is drawn in. The dim role (color8, comments) is a neutral
+    # grey lifted until it reads on black. File listings no longer get the ink:
+    # eza paints file and folder names from its own kind colours (see
+    # eza/theme.yml), which is what makes folders red while the text stays white.
+    foreground = TERMINAL_FOREGROUND
+    bright_fg = TERMINAL_FOREGROUND
     muted = lift_until_contrast(mix(foreground, background, 0.5), background, 4.5)
 
     selection = mix(surface_background, accent, 0.30)
@@ -434,11 +438,11 @@ COLORS_HEADER = """# ===========================================================
 #
 #  Source photo: {src}
 #  The photo drives one palette; each surface then takes the part it needs:
-#    · background is true black — the terminal canvas; every ANSI colour holds
-#      >= 4.8:1 there
-#    · foreground is the same true red as the ANSI red: file listings render
-#      regular file names in the default foreground, and those read as red
-#    · red and blue keep their canonical hue instead of following the photo
+#    · background is true black — the terminal canvas — and foreground is plain
+#      white: what you type and what command output is drawn in
+#    · file and folder names are painted by eza's kind colours (eza/theme.yml),
+#      not by the ink, so folders read Marin rose-pink while the text stays white
+#    · rose-pink and blue keep their fixed hue instead of following the photo
 #    · surface_* keeps the photo-tinted desktop chrome (bar / menu / launcher /
 #      lock) the theme ships, retinted by tools/marin_generate.py
 #    · the remaining accents keep Marin's rose/gold/lilac roles, photo-pulled

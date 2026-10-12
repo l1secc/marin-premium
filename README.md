@@ -15,22 +15,24 @@ It blends Marin's iconic character palette into a restrained, high-contrast "pro
 | Accessories (lilac)       | `secondary`   | `#bba7e6` | Info chips, links                |
 | School uniform (deep navy)| `surface_background` | `#0f1522` | Bar / menu / launcher / lock cards |
 | Terminal canvas           | `background`  | `#000000` | Terminal + editor background (true black) |
-| Terminal ink              | `foreground`  | `#f23636` | Terminal text — true red (file listings draw regular file names with it) |
+| Terminal ink              | `foreground`  | `#ffffff` | Terminal text — plain white |
 
 Every palette ships both halves: the **photo-tinted desktop chrome**
 (`surface_*`, used by `shell.toml`, `waybar.css` and `hyprland.conf`) and the
-**black terminal canvas with red ink** (`background`, `foreground`,
+**black terminal canvas with plain white ink** (`background`, `foreground`,
 `bright_foreground`, `muted`, driven straight into the terminal configs and the
 live Foot OSC retint).
 
 **Why "premium, low eye-strain":**
-- The terminal is true black with **red ink** (`#f23636`): `eza`/`ls` draw
-  regular file names in the terminal's default foreground, so the file names
-  read as red instead of a mute rose.
-- Terminal **red and blue stay canonical** (`true red #f23636` / `clear blue
-  #4473f3`): the photo tints the rest of the ANSI matrix, but red must read as
-  red and blue as blue. Their photo-pulled twins (`surface_red`,
-  `surface_blue`) keep the desktop chrome's error and info hues dusty.
+- The terminal is true black with **plain white ink** (`#ffffff`): what you
+  type and what command output is drawn in. `eza`/`ls` paint file and folder
+  names from their own kind colours instead (`eza/theme.yml`), so folders read
+  **Marin rose-pink** while the text stays white.
+- Terminal **rose-pink and blue stay at Marin's fixed hue** (`rose-pink
+  #f04282` / `clear blue #4473f3`): the photo tints the rest of the ANSI matrix,
+  but the red slot must read as Marin's vivid rose-pink and blue as blue. Their
+  photo-pulled twins (`surface_red`, `surface_blue`) keep the desktop chrome's
+  error and info hues dusty.
 - Every ink sits at ≥ 7:1 contrast on black; every ANSI colour at ≥ 5.9:1.
 - All accent colors are pulled ~10–15% toward warm/dusty to avoid LED glare.
 - No pure white anywhere — only layered surfaces with depth.
@@ -251,14 +253,14 @@ TRUE_HUE_ROLES = {
 `bright_magenta`, so add a `surface_bright_magenta` twin to `DESKTOP_TWINS` if
 the chrome should keep its pink.
 
-Red and blue ignore the photo on purpose — `TRUE_HUE_ROLES` holds their
-canonical hue, saturation and lightness, and `lift_until_contrast` keeps them
+Red and blue ignore the photo on purpose — `TRUE_HUE_ROLES` holds their fixed
+hue, saturation and lightness, and `lift_until_contrast` keeps them
 at >= 4.8:1 on black:
 
 ```python
 TRUE_HUE_ROLES = {
-    "red":  (0.0, 0.88, 0.58),   # (hue°, saturation, lightness) → #f23636
-    "blue": (224.0, 0.88, 0.55), #                              → #4473f3
+    "red":  (338.0, 0.85, 0.60),  # (hue°, saturation, lightness) → #f04282
+    "blue": (224.0, 0.88, 0.55),  #                              → #4473f3
 }
 ```
 

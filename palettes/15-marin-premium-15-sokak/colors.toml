@@ -4,11 +4,11 @@
 #
 #  Source photo: 03-wallpaper/marin_kitagawa_wallhaven-pkqym9.jpg
 #  The photo drives one palette; each surface then takes the part it needs:
-#    · background is true black — the terminal canvas; every ANSI colour holds
-#      >= 4.8:1 there
-#    · foreground is the same true red as the ANSI red: file listings render
-#      regular file names in the default foreground, and those read as red
-#    · red and blue keep their canonical hue instead of following the photo
+#    · background is true black — the terminal canvas — and foreground is plain
+#      white: what you type and what command output is drawn in
+#    · file and folder names are painted by eza's kind colours (eza/theme.yml),
+#      not by the ink, so folders read Marin rose-pink while the text stays white
+#    · rose-pink and blue keep their fixed hue instead of following the photo
 #    · surface_* keeps the photo-tinted desktop chrome (bar / menu / launcher /
 #      lock) the theme ships, retinted by tools/marin_generate.py
 #    · the remaining accents keep Marin's rose/gold/lilac roles, photo-pulled
@@ -27,23 +27,23 @@ dark_background          = "#30211d"
 lighter_background       = "#432c27"
 background_alt           = "#1c1311"
 background_surface       = "#362521"
-foreground               = "#f23636"
+foreground               = "#ffffff"
 surface_foreground       = "#e1dcdb"
-bright_foreground        = "#f56666"
+bright_foreground        = "#ffffff"
 surface_bright_foreground = "#f3f2f2"
 light_foreground         = "#d1c5c2"
 dark_foreground          = "#a17f78"
-muted                    = "#d54141"
+muted                    = "#808080"
 surface_muted            = "#8d675e"
-surface_red              = "#d56769"
+surface_red              = "#d56772"
 surface_blue             = "#8790de"
 accent                   = "#f2c18d"
 primary                  = "#a4c7da"
 secondary                = "#a19ed7"
 selection                = "#624b3a"
 selection_background     = "#624b3a"
-selection_foreground     = "#f56666"
-cursor                   = "#f56666"
+selection_foreground     = "#ffffff"
+cursor                   = "#ffffff"
 hyprland_active_border   = "rgba(f2c18dee) rgba(a19ed7ee) rgba(a4c7daee) 45deg"
 hyprland_inactive_border = "rgba(8d675eaa)"
 
@@ -51,7 +51,7 @@ hyprland_inactive_border = "rgba(8d675eaa)"
 #  COLORS · semantic palette (syntax-highlight friendly)
 # ---------------------------------------------------------------------------
 
-red              = "#f23636"
+red              = "#f04282"
 yellow           = "#e0c18f"
 orange           = "#daad95"
 green            = "#7fdcd4"
@@ -59,7 +59,7 @@ cyan             = "#87cade"
 blue             = "#4473f3"
 magenta          = "#e08f99"
 brown            = "#977b4f"
-bright_red       = "#f56666"
+bright_red       = "#f471a1"
 bright_yellow    = "#f2e0c5"
 bright_green     = "#b4eee9"
 bright_cyan      = "#bce4f0"
@@ -71,18 +71,18 @@ bright_magenta   = "#f2c5ca"
 # ---------------------------------------------------------------------------
 
 color0   = "#000000"
-color1   = "#f23636"
+color1   = "#f04282"
 color2   = "#7fdcd4"
 color3   = "#e0c18f"
 color4   = "#4473f3"
 color5   = "#e08f99"
 color6   = "#87cade"
-color7   = "#f23636"
-color8   = "#d54141"
-color9   = "#f56666"
+color7   = "#ffffff"
+color8   = "#808080"
+color9   = "#f471a1"
 color10  = "#b4eee9"
 color11  = "#f2e0c5"
 color12  = "#5781f4"
 color13  = "#f2c5ca"
 color14  = "#bce4f0"
-color15  = "#f56666"
+color15  = "#ffffff"
