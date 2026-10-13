@@ -30,6 +30,10 @@ HYPR_BACKUP="$HYPR_DIR/looknfeel.lua.pre-marin"
 FOOT_INI="${XDG_CONFIG_HOME:-$HOME/.config}/foot/foot.ini"
 FOOT_MARK_BEGIN="# >>> marin-premium theme (managed) >>>"
 FOOT_MARK_END="# <<< marin-premium theme (managed) <<<"
+# The staged theme Omarchy actually reads; GTK colour overrides symlink into it
+# so they follow `omarchy theme set` and `marin-next` without being re-installed.
+STAGED_THEME_DIR="$HOME/.local/state/omarchy/current/theme"
+GTK_DIRS=(gtk-3.0 gtk-4.0)
 
 QUIET=0
 WITH_SERVICE=1
@@ -83,9 +87,21 @@ if (( UNINSTALL )); then
     rm -f "$tmp"
     say "removed the managed block from $FOOT_INI"
   fi
+  # Native GTK colour overrides: drop our symlink, restore a backed-up file.
+  for tgtdir in "${GTK_DIRS[@]}"; do
+    css_file="${XDG_CONFIG_HOME:-$HOME/.config}/$tgtdir/gtk.css"
+    backup="$css_file.pre-marin"
+    if [[ -L $css_file ]]; then
+      rm -f "$css_file"
+      if [[ -f $backup ]]; then
+        mv "$backup" "$css_file"
+        say "restored your previous $css_file"
+      fi
+    fi
+  done
   hyprctl reload >/dev/null 2>&1 || true
   omarchy-restart-terminal >/dev/null 2>&1 || true
-  say "Removed marin-next, marin-bg-watch, $UNIT_NAME, the eza theme, the look'n'feel and the terminal translucency"
+  say "Removed marin-next, marin-bg-watch, $UNIT_NAME, the eza theme, the look'n'feel, the terminal translucency and the GTK colour overrides"
   exit 0
 fi
 
@@ -166,3 +182,24 @@ if [[ -f $THEME_DIR/foot/marin-foot.ini && -f $FOOT_INI ]]; then
   fi
   rm -f "$tmp"
 fi
+
+# 6. Native GTK apps: point ~/.config/gtk-{3,4}.0/gtk.css at the staged theme's
+#    Marin palette so GTK windows match the terminal, the bar and the shell.
+#    Symlinked so the colours follow `omarchy theme set` and `marin-next`
+#    without this script running again; the user's own file is backed up first.
+for tgtdir in "${GTK_DIRS[@]}"; do
+  css_dir="${XDG_CONFIG_HOME:-$HOME/.config}/$tgtdir"
+  css_file="$css_dir/gtk.css"
+  backup="$css_file.pre-marin"
+  target="$STAGED_THEME_DIR/$tgtdir/gtk.css"
+  [[ -f $target ]] || continue
+  mkdir -p "$css_dir"
+  if [[ -f $css_file && ! -L $css_file ]] && [[ ! -f $backup ]]; then
+    cp -p "$css_file" "$backup"
+    say "✓ kept your previous $css_file as $backup"
+  fi
+  if [[ ! -L $css_file || $(readlink "$css_file") != "$target" ]]; then
+    ln -sfn "$target" "$css_file"
+    say "✓ $css_file → Marin palette"
+  fi
+done

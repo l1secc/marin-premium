@@ -171,6 +171,63 @@ done
 # exactly the ~250 MB spike the background watcher used to cause on every
 # wallpaper change. The light path touches only user-owned files and the shell
 # socket, so the watcher can run sandboxed with no way to escalate.
+
+# Rebuild every template-derived config (hyprland.lua, foot.ini, btop.theme,
+# chromium.theme, alacritty.toml, …) from the palette now staged in
+# $STAGED_THEME_DIR. The full `omarchy-theme-set` chain does this for us, but
+# the light path deliberately skips that chain — without this the derived
+# colours keep the previous photo's palette, most visibly the window border
+# gradient in hyprland.lua. Uses the same lock omarchy-theme-set holds so the
+# two paths can never share the next-theme staging directory.
+regenerate_templates() {
+  local live="$STAGED_THEME_DIR"
+  local next="$CURRENT_DIR/next-theme"
+  local lock="${XDG_RUNTIME_DIR:-/tmp}/omarchy-theme-set.lock"
+  local f base
+
+  [[ -f $live/colors.toml ]] || return 0
+  command -v omarchy-theme-set-templates >/dev/null 2>&1 || return 0
+  : "${OMARCHY_PATH:=/usr/share/omarchy}"
+  export OMARCHY_PATH
+
+  mkdir -p "$CURRENT_DIR" "${XDG_RUNTIME_DIR:-/tmp}"
+  exec 9>"$lock" || return 0
+  flock 9 || return 0
+
+  rm -rf "$next"
+  mkdir -p "$next"
+  if ! install -m644 "$live/colors.toml" "$next/colors.toml"; then
+    rm -rf "$next"
+    flock -u 9
+    return 0
+  fi
+  for f in "$live"/shell.*.toml; do
+    [[ -f $f ]] || continue
+    install -m644 "$f" "$next/${f##*/}"
+  done
+
+  if ! omarchy-theme-set-templates >/dev/null 2>&1; then
+    rm -rf "$next"
+    flock -u 9
+    return 0
+  fi
+
+  for f in "$next"/*; do
+    [[ -f $f ]] || continue
+    base=${f##*/}
+    case "$base" in
+      colors.toml | shell.*.toml) continue ;;
+    esac
+    # A file the theme ships itself always wins over the generated template.
+    [[ -e "$THEME_DIR/$base" ]] && continue
+    install -m644 "$f" "$live/$base"
+  done
+
+  rm -rf "$next"
+  flock -u 9
+  return 0
+}
+
 light_retint() {
   local live="$STAGED_THEME_DIR" f colors_payload shell_payload
 
@@ -181,6 +238,11 @@ light_retint() {
     [[ -f "$THEME_DIR/$f" ]] || continue
     install -m644 "$THEME_DIR/$f" "$live/$f" || return 1
   done
+
+  # Rebuild the template-derived configs from the palette we just staged, then
+  # reload Hyprland so the new border gradient (hyprland.lua) goes live.
+  regenerate_templates
+  command -v hyprctl >/dev/null 2>&1 && hyprctl reload >/dev/null 2>&1 || true
 
   # Hot-reload the running shell (bar / menu / launcher / lock / OSD).
   if command -v omarchy-shell >/dev/null 2>&1; then

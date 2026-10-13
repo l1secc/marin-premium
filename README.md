@@ -45,9 +45,15 @@ live Foot OSC retint).
 | File             | Purpose                                                                |
 |------------------|------------------------------------------------------------------------|
 | `colors.toml`    | **Active** palette (drives terminals, editors, bar, menus, lock screen) |
-| `hyprland.conf`  | Active window manager: gradient border, blur, shadows, animations      |
+| `hyprland.conf`  | Legacy Hyprland config: gradient border, blur, shadows, animations      |
+| `hypr/looknfeel.lua` | **Active** Hyprland look'n'feel: rounded corners, blur, soft shadows, app translucency and the Marin bezier animation curves — installed into `~/.config/hypr/` by `marin-bootstrap` |
 | `shell.toml`     | Active Omarchy bar / OSD / launcher / menu / lock surfaces             |
 | `waybar.css`     | Active Glassmorphism Waybar styles                                     |
+| `gtk.css`, `gtk-3.0/`, `gtk-4.0/` | Native GTK colour tokens (Adwaita + ANSI). `marin-bootstrap` symlinks them into `~/.config/gtk-{3,4}.0/gtk.css` |
+| `icons.theme`    | GNOME icon-theme colour (`Yaru-magenta`), applied by `omarchy-theme-set-gnome` |
+| `chromium.theme` | Chromium/Chrome/Edge/Brave accent colour (surface background as `R,G,B`) |
+| `eza/theme.yml`  | eza file-kind colours (folders rose-pink, text stays white)            |
+| `foot/marin-foot.ini` | Terminal translucency block appended to `~/.config/foot/foot.ini` |
 | `backgrounds/`   | 10 Marin wallpapers (1920×1080) — the theme's gallery                  |
 | `palettes/`      | 10 palette bundles; `marin-next` copies one to the root on switch      |
 | `tools/`         | `marin_generate.py` (palette generator), `marin-next` (photo switcher), `marin-bg-watch` (background watcher), `marin-bootstrap` (PATH + service install) |
@@ -64,6 +70,11 @@ theme root and re-applies the theme with `OMARCHY_THEME_SKIP_BACKGROUND=1`, so
 Omarchy regenerates every terminal, editor, bar, menu, launcher and lock-screen
 config from that photo's palette — and retints running Foot windows through
 OSC — **without** touching the wallpaper. It then pins the matching wallpaper.
+
+The background watcher (`marin-next sync --light`) rebuilds those template-derived
+configs too — including `hyprland.lua`, whose gradient border would otherwise
+keep the previous photo's colours — so a photo picked from **Omarchy's own**
+background switcher retints the window edges as well as the terminal and shell.
 
 One roof holds everything: one theme entry, one gallery of 10 wallpapers, one
 palette per photo.
