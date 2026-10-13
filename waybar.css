@@ -1,26 +1,26 @@
 /* ============================================================================
-   Marin Kitagawa — "Marin Premium" · Deniz Esintisi  ·  Waybar
+   Marin Kitagawa — "Marin Premium" · Sahil Molası  ·  Waybar
    Retinted from the wallpaper palette by tools/marin_generate.py
-   surface #261d19 · accent #dcae94 · primary #dac69a · secondary #a6cadc
+   surface #171d26 · accent #72b5ef · primary #d5a996 · secondary #7b92eb
    ========================================================================= */
 
-@define-color background      #261d19;
-@define-color background-alt  #31261f;
-@define-color surface         rgba(49, 38, 31, 0.55);
-@define-color surface-hi      rgba(66, 51, 42, 0.65);
-@define-color foreground      #e1dddb;
-@define-color muted           #a18678;
-@define-color pink            #dcae94;
-@define-color pink-bright     #efc7c8;
-@define-color gold            #dac69a;
-@define-color gold-bright     #efe3c7;
-@define-color lilac           #a6cadc;
+@define-color background      #171d26;
+@define-color background-alt  #1d2532;
+@define-color surface         rgba(29, 37, 50, 0.55);
+@define-color surface-hi      rgba(38, 50, 69, 0.65);
+@define-color foreground      #dbdde1;
+@define-color muted           #7888a1;
+@define-color pink            #72b5ef;
+@define-color pink-bright     #f4c3c6;
+@define-color gold            #d5a996;
+@define-color gold-bright     #f4e1c3;
+@define-color lilac           #7b92eb;
 @define-color lilac-bright    #d2c4f0;
-@define-color rose            #d17374;
-@define-color sage            #84d7cf;
-@define-color periwinkle       #8cacd9;
-@define-color border          rgba(220, 174, 148, 0.35);
-@define-color border-soft     rgba(166, 202, 220, 0.18);
+@define-color rose            #dc676b;
+@define-color sage            #7ae1dc;
+@define-color periwinkle       #8299e3;
+@define-color border          rgba(114, 181, 239, 0.35);
+@define-color border-soft     rgba(123, 146, 235, 0.18);
 @define-color shadow          rgba(0, 0, 0, 0.45);
 
 * {
@@ -40,7 +40,7 @@ window#waybar {
 }
 
 window#waybar:placeholder {
-    background: rgba(38, 29, 25, 0.35);
+    background: rgba(23, 29, 38, 0.35);
 }
 
 /* ------------------------------------------------------------------ */
@@ -97,29 +97,29 @@ window#waybar:placeholder {
 }
 
 #workspaces button:hover {
-    background: rgba(220, 174, 148, 0.12);
+    background: rgba(114, 181, 239, 0.12);
     color: @pink-bright;
-    border-color: rgba(220, 174, 148, 0.25);
-    box-shadow: 0 0 12px rgba(220, 174, 148, 0.20);
+    border-color: rgba(114, 181, 239, 0.25);
+    box-shadow: 0 0 12px rgba(114, 181, 239, 0.20);
 }
 
 #workspaces button.active {
     background: linear-gradient(
         135deg,
-        rgba(220, 174, 148, 0.32),
-        rgba(218, 198, 154, 0.32)
+        rgba(114, 181, 239, 0.32),
+        rgba(213, 169, 150, 0.32)
     );
     color: @foreground;
-    border: 1px solid rgba(220, 174, 148, 0.55);
+    border: 1px solid rgba(114, 181, 239, 0.55);
     box-shadow:
-        0 0 16px rgba(220, 174, 148, 0.22),
+        0 0 16px rgba(114, 181, 239, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 #workspaces button.urgent {
-    background: rgba(209, 115, 116, 0.32);
+    background: rgba(220, 103, 107, 0.32);
     color: @rose;
-    border: 1px solid rgba(209, 115, 116, 0.55);
+    border: 1px solid rgba(220, 103, 107, 0.55);
     animation: urgent-pulse 1.2s ease-in-out infinite;
 }
 
@@ -141,7 +141,7 @@ window#waybar:placeholder {
     color: @gold-bright;
     font-weight: 700;
     font-size: 13.5px;
-    text-shadow: 0 0 8px rgba(218, 198, 154, 0.20);
+    text-shadow: 0 0 8px rgba(213, 169, 150, 0.20);
 }
 
 #clock.date {
@@ -207,7 +207,7 @@ window#waybar:placeholder {
 
 /* Tooltip */
 tooltip {
-    background: rgba(49, 38, 31, 0.92);
+    background: rgba(29, 37, 50, 0.92);
     border: 1px solid @border;
     border-radius: 10px;
     color: @foreground;

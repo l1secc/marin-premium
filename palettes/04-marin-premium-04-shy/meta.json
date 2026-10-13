@@ -1,0 +1,17 @@
+{
+  "num": "04",
+  "slug": "marin-premium-04-shy",
+  "theme": "Marin Premium 04 Shy",
+  "title": "Utangaç An",
+  "wallpaper": "Marin-04-shy.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-j37kpm.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#000000",
+    "foreground": "#ffffff",
+    "accent": "#b0d6ec",
+    "primary": "#d6aa9a",
+    "secondary": "#baa8db"
+  },
+  "generator": "tools/marin_generate.py"
+}

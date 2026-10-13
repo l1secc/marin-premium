@@ -1,0 +1,17 @@
+{
+  "num": "01",
+  "slug": "marin-premium-01-hearts",
+  "theme": "Marin Premium 01 Hearts",
+  "title": "Kalp Kalbe",
+  "wallpaper": "Marin-01-hearts.jpg",
+  "source": "01-marin-anime-art/marin_kitagawa_4015338.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#000000",
+    "foreground": "#ffffff",
+    "accent": "#e3bbb4",
+    "primary": "#e997d4",
+    "secondary": "#99c0d5"
+  },
+  "generator": "tools/marin_generate.py"
+}

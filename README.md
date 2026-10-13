@@ -48,8 +48,8 @@ live Foot OSC retint).
 | `hyprland.conf`  | Active window manager: gradient border, blur, shadows, animations      |
 | `shell.toml`     | Active Omarchy bar / OSD / launcher / menu / lock surfaces             |
 | `waybar.css`     | Active Glassmorphism Waybar styles                                     |
-| `backgrounds/`   | 20 Marin wallpapers (1920×1080) — the theme's gallery                  |
-| `palettes/`      | 20 palette bundles; `marin-next` copies one to the root on switch      |
+| `backgrounds/`   | 10 Marin wallpapers (1920×1080) — the theme's gallery                  |
+| `palettes/`      | 10 palette bundles; `marin-next` copies one to the root on switch      |
 | `tools/`         | `marin_generate.py` (palette generator), `marin-next` (photo switcher), `marin-bg-watch` (background watcher), `marin-bootstrap` (PATH + service install) |
 | `systemd/`       | `marin-premium-bg-sync.service` — keeps Omarchy's own picker in sync   |
 
@@ -57,7 +57,7 @@ live Foot OSC retint).
 
 ## One theme, all photos
 
-All 20 Marin photos live under the **single** `marin-premium` theme. Each photo
+All 10 Marin photos live under the **single** `marin-premium` theme. Each photo
 has a palette bundle in `palettes/<num>-<slug>/`; `marin-next` copies the chosen
 bundle's `colors.toml` / `shell.toml` / `waybar.css` / `hyprland.conf` to the
 theme root and re-applies the theme with `OMARCHY_THEME_SKIP_BACKGROUND=1`, so
@@ -65,38 +65,28 @@ Omarchy regenerates every terminal, editor, bar, menu, launcher and lock-screen
 config from that photo's palette — and retints running Foot windows through
 OSC — **without** touching the wallpaper. It then pins the matching wallpaper.
 
-One roof holds everything: one theme entry, one gallery of 20 wallpapers, one
+One roof holds everything: one theme entry, one gallery of 10 wallpapers, one
 palette per photo.
 
 | # | Title | Palette bundle |
 |---|-------|----------------|
-| 01 | Klasik · Festival Gecesi | `palettes/01-marin-premium` |
-| 02 | Kimono Gün Batımı | `palettes/02-marin-premium-02-kimono` |
-| 03 | Kalp Kalbe | `palettes/03-marin-premium-03-kalpler` |
-| 04 | Zarif Duruş | `palettes/04-marin-premium-04-zarif` |
-| 05 | Parkta Mola | `palettes/05-marin-premium-05-park` |
-| 06 | Sahil Molası | `palettes/06-marin-premium-06-sahil` |
-| 07 | Yumuşak Bakış | `palettes/07-marin-premium-07-profil` |
-| 08 | Tatlı Gülüş | `palettes/08-marin-premium-08-gulus` |
-| 09 | Dantel Beyaz | `palettes/09-marin-premium-09-dantel` |
-| 10 | Şapkalı Yaz | `palettes/10-marin-premium-10-sapka` |
-| 11 | Selfie Anı | `palettes/11-marin-premium-11-selfie` |
-| 12 | Pencere Işığı | `palettes/12-marin-premium-12-pencere` |
-| 13 | Utangaç An | `palettes/13-marin-premium-13-utangac` |
-| 14 | Kafe Keyfi | `palettes/14-marin-premium-14-kafe` |
-| 15 | Sokakta | `palettes/15-marin-premium-15-sokak` |
-| 16 | Yumuşak Işık | `palettes/16-marin-premium-16-yumusak` |
-| 17 | Deniz Esintisi | `palettes/17-marin-premium-17-esinti` |
-| 18 | Pembe Enerji | `palettes/18-marin-premium-18-pembe` |
-| 19 | Şehir Işıkları | `palettes/19-marin-premium-19-sehir` |
-| 20 | Keyif Anı | `palettes/20-marin-premium-20-keyif` |
+| 01 | Kalp Kalbe | `palettes/01-marin-premium-01-hearts` |
+| 02 | Parkta Mola | `palettes/02-marin-premium-02-park` |
+| 03 | Sahil Molası | `palettes/03-marin-premium-03-beach` |
+| 04 | Utangaç An | `palettes/04-marin-premium-04-shy` |
+| 05 | Kafe Keyfi | `palettes/05-marin-premium-05-cafe` |
+| 06 | Deniz Esintisi | `palettes/06-marin-premium-06-breeze` |
+| 07 | Pembe Enerji | `palettes/07-marin-premium-07-pink` |
+| 08 | Keyif Anı | `palettes/08-marin-premium-08-treat` |
+| 09 | Işıltı | `palettes/09-marin-premium-09-glow` |
+| 10 | Kıvılcım | `palettes/10-marin-premium-10-spark` |
 
 Switch photo + whole desktop palette together:
 
 ```bash
 marin-next          # next photo: wallpaper + terminal ink + menu retinted
 marin-next prev     # previous photo
-marin-next 20       # jump to photo #20
+marin-next 6        # jump to photo #6 (Deniz Esintisi)
 marin-next kimono   # jump by name match
 marin-next sync     # re-align palette with the current background
 ```
@@ -128,11 +118,12 @@ systemctl --user restart marin-premium-bg-sync   # after editing the theme
 > matching bundle under `palettes/` only. A photo without a bundle has no
 > palette to sync to, so the previous photo's colours stay on screen.
 
-Regenerate the bundles and wallpapers after editing the classic master configs:
+Regenerate the bundles and wallpapers after editing the retint base
+(`tools/template/`) or the manifest (`tools/photos.json`):
 
 ```bash
 python3 tools/marin_generate.py                 # all palettes + wallpapers
-python3 tools/marin_generate.py --only marin-premium-20-kalpler
+python3 tools/marin_generate.py --only marin-premium-09-glow
 python3 tools/marin_generate.py --dry-run       # check palettes without writing
 ```
 
@@ -140,7 +131,7 @@ python3 tools/marin_generate.py --dry-run       # check palettes without writing
 
 ## Backgrounds
 
-The single theme ships **20 Marin wallpapers** in `backgrounds/`. Each is
+The single theme ships **10 Marin wallpapers** in `backgrounds/`. Each is
 1920×1080, cropped to 16:9 and given a photo-tinted top scrim so the bar stays
 readable. The earlier near-black procedural `BG1–BG6` backgrounds were removed.
 
@@ -272,18 +263,18 @@ and surface roles are independent: change `background` to tint the terminal,
 change `surface_background` to tint the bar and menu.
 
 Want the whole desktop black too? Point both at black in
-`palettes/01-marin-premium/colors.toml` and regenerate.
+`tools/template/colors.toml` and regenerate.
 
-### Tweak the classic palette
+### Tweak the retint base
 
 The root `colors.toml` is the *active* palette and is replaced on every
-`marin-next` switch. To change the default (classic) palette, edit
-`palettes/01-marin-premium/colors.toml`, regenerate the other bundles from it,
-then apply:
+`marin-next` switch. To change the base every photo bundle is retinted from,
+edit `tools/template/colors.toml` and the template configs beside it, regenerate
+the bundles, then apply:
 
 ```bash
-python3 tools/marin_generate.py     # retint all bundles from the classic
-marin-next 1                        # apply the classic palette
+python3 tools/marin_generate.py     # retint all bundles from the base
+marin-next 6                        # apply a photo bundle
 ```
 
 ### Adjust window animations

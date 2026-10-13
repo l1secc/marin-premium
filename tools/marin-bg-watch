@@ -51,7 +51,7 @@ sync_now() {
   # Only act while the Marin theme is the one on screen.
   [[ "$(cat "$STATE_DIR/theme.name" 2>/dev/null)" == "marin-premium" ]] || return 0
 
-  "$MARIN_NEXT" sync --quiet || printf 'marin-bg-watch: sync failed for %s\n' "$target" >&2
+  "$MARIN_NEXT" sync --light --quiet || printf 'marin-bg-watch: sync failed for %s\n' "$target" >&2
   return 0
 }
 

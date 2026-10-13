@@ -14,8 +14,8 @@ Every photo in tools/photos.json becomes its own Omarchy theme:
         backgrounds/<file>.jpg  # 1920x1080 prepared wallpaper (cover crop + adaptive top scrim)
         .marin-photo.json    # provenance
 
-The master theme (marin-premium) keeps its hand-authored "classic" palette and only
-gets its default wallpaper refreshed.
+The master theme (marin-premium) keeps its retint base under `tools/template/`
+and only gets its default wallpaper refreshed.
 
 Usage:
     python3 tools/marin_generate.py [--only SLUG] [--dry-run] [--skip-wallpaper]
@@ -40,7 +40,10 @@ MASTER_DIR = os.path.join(THEMES_DIR, "marin-premium")
 TOOLS_DIR = os.path.join(MASTER_DIR, "tools")
 MANIFEST = os.path.join(TOOLS_DIR, "photos.json")
 PALETTES_DIR = os.path.join(MASTER_DIR, "palettes")
-CLASSIC_DIR = os.path.join(PALETTES_DIR, "01-marin-premium")
+# The retint base (classic palette + shell/waybar/hyprland templates) lives
+# outside `palettes/` so it is never offered as a selectable photo. Every photo
+# bundle is retinted from it by hex substitution.
+CLASSIC_DIR = os.path.join(MASTER_DIR, "tools", "template")
 BG_DIR = os.path.join(MASTER_DIR, "backgrounds")
 MASTER_COLORS = os.path.join(CLASSIC_DIR, "colors.toml")
 TEMPLATE_FILES = ("shell.toml", "waybar.css", "hyprland.conf")
@@ -593,7 +596,7 @@ def write_variant(entry: dict, master: dict[str, str], palette: dict[str, str],
         fh.write(render_colors_toml(palette, entry["title"], entry["src"]))
     actions.append("colors.toml")
 
-    # Retint the classic (photo 01) master configs into this photo's palette.
+    # Retint the tools/template/ base configs into this photo's palette.
     for name in TEMPLATE_FILES:
         src = os.path.join(CLASSIC_DIR, name)
         if not os.path.exists(src):
@@ -691,11 +694,11 @@ def prepare_wallpaper(src: str, out: str, focus: str, scrim_hex: str) -> dict:
 # single-theme bundles: classic template + per-photo wallpapers
 # --------------------------------------------------------------------------- #
 def ensure_classic_bundle(dry: bool = False) -> None:
-    """Snapshot the hand-authored master configs as the "01 classic" palette.
+    """Snapshot the master configs as the retint base under tools/template/.
 
-    The theme root holds the *active* palette once `marin-next` starts cycling,
-    so the pristine classic configs are captured once, before anything
-    overwrites them, and every other palette is retinted from that snapshot.
+    Every photo bundle is retinted from these files, so they are captured once
+    from the theme root and never shown in the switcher (which only scans
+    `palettes/`).
     """
     if os.path.exists(os.path.join(CLASSIC_DIR, "colors.toml")) or dry:
         return

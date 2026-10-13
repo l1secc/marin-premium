@@ -71,4 +71,4 @@ case ":$PATH:" in
   *) echo "! note: $BIN_DIR is not on your PATH — add it to call 'marin-next' directly." >&2 ;;
 esac
 
-echo "Try:  marin-next  |  marin-next prev  |  marin-next sync  |  marin-next 20"
+echo "Try:  marin-next  |  marin-next prev  |  marin-next sync  |  marin-next 6"

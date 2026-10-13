@@ -1,0 +1,17 @@
+{
+  "num": "07",
+  "slug": "marin-premium-07-pink",
+  "theme": "Marin Premium 07 Pink",
+  "title": "Pembe Enerji",
+  "wallpaper": "Marin-07-pink.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-v9l83m.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#000000",
+    "foreground": "#ffffff",
+    "accent": "#a7cff5",
+    "primary": "#e29ca3",
+    "secondary": "#9f6cc3"
+  },
+  "generator": "tools/marin_generate.py"
+}

@@ -1,0 +1,17 @@
+{
+  "num": "05",
+  "slug": "marin-premium-05-cafe",
+  "theme": "Marin Premium 05 Cafe",
+  "title": "Kafe Keyfi",
+  "wallpaper": "Marin-05-cafe.jpg",
+  "source": "03-wallpaper/marin_kitagawa_wallhaven-mlq7q1.jpg",
+  "source_root": "~/theme/marin_kitagawa",
+  "palette": {
+    "background": "#000000",
+    "foreground": "#ffffff",
+    "accent": "#c18c67",
+    "primary": "#c2ab6b",
+    "secondary": "#d1ce8e"
+  },
+  "generator": "tools/marin_generate.py"
+}

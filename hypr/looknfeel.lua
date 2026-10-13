@@ -40,7 +40,8 @@ hl.config({
     blur = {
       enabled = true,
       size = 6,
-      passes = 3,
+      -- 2 passes read the same as 3 for this radius and cost less per frame.
+      passes = 2,
       noise = 0.0117,
       contrast = 1.0,
       brightness = 1.0,
